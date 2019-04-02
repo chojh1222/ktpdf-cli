@@ -30,6 +30,8 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
     this.getNewPdfItem = this.getNewPdfItem.bind(this);
   }
 
+  pageRendering = false;
+
   componentDidMount() {
     $(window).on('mousewheel', this.handleMouseWheel);
   }
@@ -47,6 +49,10 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
 
   handleMouseWheel = e => {
     console.log($(window).scrollTop(), $(window).height(), $(document).height())
+    if(this.pageRendering) {
+      console.log('page still rendering!')
+      return;
+    }
 
     if(e.originalEvent.wheelDelta /120 > 0) {
         // console.log('scrolling up !');
@@ -58,6 +64,7 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
           if(pageNumber >= 1) {
             console.log('setting page ', pageNumber)
             e.preventDefault()
+            this.pageRendering = true;
             this.props.onPageChange(pageNumber, document.body.scrollHeight);
             // window.scrollTo(0,document.body.scrollHeight);
           }
@@ -73,6 +80,7 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
           if(pageNumber <= numPages) {
             console.log('setting page ', pageNumber)
             e.preventDefault();
+            this.pageRendering = true;
             this.props.onPageChange(pageNumber, 0);
             // window.scrollTo(0, 0)
           }
@@ -88,6 +96,7 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
   private getNewPdfItem(e: React.MouseEvent) {
     e.preventDefault();
     const pageNumber = Number(e.currentTarget.getAttribute('data-index')) + 1;
+    this.pageRendering = true;
     this.props.onPageChange(pageNumber, undefined);
   }
 
@@ -104,6 +113,7 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
 
   onPageRenderSuccess = (page) => {
     console.log('Document.tsx PageRenderSuccess')
+    this.pageRendering = false;
     // console.log(page.width, page.height)
     this.setState({
       pageWidth: page.width,
