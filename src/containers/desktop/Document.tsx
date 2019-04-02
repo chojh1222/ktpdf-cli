@@ -268,17 +268,11 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
   }
 
   private newInputBox(type, mouseX, mouseY) {
-  // private addInputBox(type) {
     
     if(this.state.newInputBox) {
       return;
     }
 
-    
-      
-
-
-    
     const {
       boxDataList,
       pageNumber,
@@ -289,10 +283,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
       return false;
     }
 
-    
-
     const copyBoxDataList = [...boxDataList];
-
     
     let initBoxData;
     if(type === 'text') {
@@ -307,8 +298,6 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
     else if(type === 'radio') {
       initBoxData = getInitRadioBox(pageNumber, selectSignerIndex, copyBoxDataList.length);
     }
-
-    
 
     initBoxData.left = mouseX;
     initBoxData.top = mouseY;
@@ -658,7 +647,6 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
     if(!newInputBox) {
       return;
     }
-    console.log('drop the beat!!')
     let left = e.pageX - $(e.currentTarget).offset().left;
     let top = e.pageY - $(e.currentTarget).offset().top;
     let width = newInputBox.width;
@@ -733,86 +721,6 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
                         />
             </PdfViewer>
 
-            {/* <div className="thumbnail">
-
-              <ul>
-                      <Document
-                        file={this.props.documentUrl}
-                      >
-                        {Array.from(
-                          new Array(numPages),
-                          (el, index) => (
-                            <li 
-                              key={index}
-                              className={pageNumber === index+1  ? 'on' : undefined}
-                            >
-                              <a href="#" data-index={index} onClick={this.getNewPdfItem}>
-                                <Page
-                                  key={`page_${index + 1}`}
-                                  pageNumber={index + 1}
-                                  renderMode='canvas'
-                                  renderTextLayer={false}
-                                  renderAnnotationLayer={false}
-                                  // onLoadSuccess={page => console.log(`thumbnail page-${page.pageNumber} loaded`)}
-                                  onRenderSuccess={this.onThumbnailRenderSuccess}
-                                  scale={0.22}
-                                />
-                              </a>
-                            </li>
-                          ),
-                        )}
-                      </Document>
-              </ul>
-
-            </div>
-            <div className="editor-view">
-              
-              <Document
-                className='document-wrapper'
-                file={this.props.documentUrl}
-                onLoadSuccess={this.onDocumentLoadSuccess}
-              >
-                <Page 
-                  className='page-wrapper'
-                  pageNumber={pageNumber}
-                  renderTextLayer={false}
-                  renderAnnotationLayer={false}
-                  scale={scale}
-                  onLoadSuccess={this.onPageLoadSuccess}
-                  onRenderSuccess={this.onPageRenderSuccess}
-                >
-                  <div
-                    className="inputbox-area"
-                    style={{
-                      // width: this.state.pageWidth,
-                      // height: this.state.pageHeight,
-                      width: '100%',
-                      height: '100%',
-                      position: 'absolute',
-                      // marginTop: '10px',
-                      // paddingBottom: '10px',
-                      zIndex: 10,
-                      top: 0,
-                      // left: '50%',
-                      // transform: 'translateX(-50%)',
-                    }}
-                    // onMouseMove={this.documentMouseMove}
-                    // onMouseUp={this.updateEventObjectToNull}
-                    onMouseUp={this.handleMouseUp}
-                  >
-                        <ContainerForBoxes
-                          updateInputBox={this.updateInputBox}
-                          boxDataList={curPageInputBox}
-                          users={signerList}
-                          page={pageNumber}
-                          deleteInputBox={this.deleteInputBox}
-                          scale={scale}
-                        />
-                  </div>
-                </Page>
-              </Document>
-
-            </div> */}
             <div className="edit-pallet">
               <div className="input-select secondary">
                 <select

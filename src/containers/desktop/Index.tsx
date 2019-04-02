@@ -1,6 +1,9 @@
 import * as React from "react";
 class Index extends React.Component<{}, React.ComponentState> {
+
   public render(): JSX.Element {
+    console.log('rendering index.tsx!')
+    
     // const url = 'http://paperless.kt.com';
     const url = 'http://localhost';
     const port_node = '3000';
@@ -14,6 +17,9 @@ class Index extends React.Component<{}, React.ComponentState> {
         <p><a href={'/contract?docNo=190001&signerNo=signer1'}>서명자 페이지</a></p>
         <p><a href={'/complete?docNo=190001&signerNo=signer1'}>생성자 확인 페이지</a></p>
         <p><a href={`${url}:${port_api}/escDoc/190001/docSign/signer2`}>서명자 서명 확인</a></p>
+        <hr/>
+        <p><a href={'/document/index.html?docNo=190001'}>생성자 페이지</a></p>
+        <p><a href={'/contract/index.html?docNo=190001&signerNo=signer1'}>서명자 페이지</a></p>
       </div>
     );
   }

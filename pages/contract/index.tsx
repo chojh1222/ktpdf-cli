@@ -13,6 +13,7 @@ import Head from 'next/head'
 class Contract extends React.Component<any, React.ComponentState> {
 
   static async getInitialProps({ query }) {
+    console.log('getInitialProps!')
     const { docNo, signerNo } = query;
 
     return {signerNo, documentNo: docNo}
@@ -29,7 +30,12 @@ class Contract extends React.Component<any, React.ComponentState> {
   }
 
   componentDidMount() {
-    const { signerNo, documentNo } = this.props;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const documentNo = urlParams.get('docNo');
+    const signerNo = urlParams.get('signerNo');
+
+    // const { signerNo, documentNo } = this.props;
     getDocumentInfoForSigner(documentNo, signerNo)
       .then((data: any) => {
         console.log('then data ==================================')
@@ -37,13 +43,16 @@ class Contract extends React.Component<any, React.ComponentState> {
         this.setState({
           signer: data.signer,
           inputs: data.inputs,
-          documentUrl: data.filePath
+          documentUrl: data.filePath,
+          documentNo,
+          signerNo
         });
       });
   }
 
   render() {
-    const { documentNo } = this.props;
+    // const { documentNo } = this.props;
+    const { documentNo } = this.state;
     const { signer, inputs, documentUrl } = this.state;
 console.log("inputs.length : " + inputs.length);
     if(inputs.length < 1) return null;
@@ -52,7 +61,8 @@ console.log("inputs.length : " + inputs.length);
       <div>
         <Head>
           <title>kt - contract</title>
-          <link href="/assets/css/style.css" rel="stylesheet" />
+          {/* <link href="/assets/css/style.css" rel="stylesheet" /> */}
+          <link href="/static/assets/css/style.css" rel="stylesheet" />
         </Head>
         <DragDropContextProvider backend={HTML5Backend}>
           <ContractContainer
