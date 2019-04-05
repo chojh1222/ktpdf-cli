@@ -1,31 +1,36 @@
 import $ from 'jquery';
 import * as React from "react";
 import { pdfjs } from 'react-pdf';
-import { CheckBox, RadioBox, SignBox, TextBox, InputBox } from "src/interface/InputBox";
-import { getDocumentInfo } from "../../../src/api/document/getDocumentInfo";
+import { CheckBox, InputBox, RadioBox, SignBox, TextBox } from "src/interface/InputBox";
+import NewInputbox from '../../../src/components/NewInputBox';
 import { setDocumentInfo } from "../../api/document/setDocumentInfo";
 import ContainerForBoxes from "../../components/ContainerForBoxes";
 import { ISigner } from "../../interface/ISigner";
 import { deepCopy } from "../../util/deepCopy";
+import { fontList, fontSizeList } from '../../util/fontCode';
 import PdfViewer from "./PdfViewer";
 import "./reset.css";
-import NewInputbox from '../../../src/components/NewInputBox';
 
 
 
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// pdfjs.GlobalWorkerOptions.workerSrc = `../../pdf.worker.js`;
 
 
 const defaultData = {
   width: 200,
   height: 100,
-  fontSize: 12,
-  fontFamily: 'Times-Roman',
+  fontSize: fontSizeList[0],
+  fontFamily: fontList[0].fontFamily,
   top: 50,
   textLeft: 0,
   signLeft: 250,
-  boxIndex: -1
+  boxIndex: -1,
+  textboxMinWidth: 50,
+  signboxMinWidth: 50,
+  checkboxMinWidth: 20,
+  radioboxMinWidth: 20,
 };
 
 const getInitTextBox = (page, signerIndex, boxIndex): TextBox => {
@@ -40,7 +45,7 @@ const getInitTextBox = (page, signerIndex, boxIndex): TextBox => {
     signerIndex,
     page,
     boxIndex,
-    minWidth: undefined,
+    minWidth: defaultData.textboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -56,7 +61,7 @@ const getInitSignBox = (page, signerIndex, boxIndex): SignBox => {
     signerIndex,
     page,
     boxIndex,
-    minWidth: undefined,
+    minWidth: defaultData.signboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -74,7 +79,7 @@ const roadInitTextBox = (input, index): TextBox => {
     signerIndex:0,  // 생성자꺼...
     page: input.page,
     boxIndex : index,
-    minWidth: undefined,
+    minWidth: defaultData.textboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -91,7 +96,7 @@ const roadInitSignBox = (input, index): SignBox => {
     signerIndex:0,  // 생성자꺼...
     page: input.page,
     boxIndex : index,
-    minWidth: undefined,
+    minWidth: defaultData.signboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -108,7 +113,7 @@ const roadInitCheckBox = (input, index): SignBox => {
     signerIndex:0,  // 생성자꺼...
     page: input.page,
     boxIndex : index,
-    minWidth: undefined,
+    minWidth: defaultData.checkboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -125,7 +130,7 @@ const getInitCheckBox = (page, signerIndex, boxIndex): CheckBox => {
     signerIndex,
     page,
     boxIndex,
-    minWidth: undefined,
+    minWidth: defaultData.checkboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -142,7 +147,7 @@ const getInitRadioBox = (page, signerIndex, boxIndex): RadioBox => {
     signerIndex,
     page,
     boxIndex,
-    minWidth: undefined,
+    minWidth: defaultData.radioboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -157,8 +162,7 @@ interface IDocumentProps {
   fileName: string;
   userId: string;  
   // inputs: Array<IInput>;
-  inputs: []
-  tmpDocId: string;
+  inputs: [];
 }
 
 class DocumentContainer extends React.Component<IDocumentProps, React.ComponentState> {
@@ -176,8 +180,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
       pageNumber: 1,
       boxDataList: [],
       scale: 1.5,
-      selectSignerIndex: -1,
-      tmpDocId:'',
+      selectSignerIndex: -1,      
       newInputBox: null,
     };
 
@@ -195,21 +198,17 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
   }
 
   componentDidMount() {
-    // console.log("Document.tsx ============================== componentDidMount ");
+    console.log("Document.tsx ============================== componentDidMount ");
     this.initBoxData();
 
-    const {documentNo, tmpDocId, userId} = this.props;    
-    // console.log("userId :: " + userId)
-    // 템플릿 아이디가 있다면 기존 객체를 조회해본다.
-    if(tmpDocId != ''){
-      getDocumentInfo(documentNo, tmpDocId, userId)
-      .then((data: IDocumentProps) => {
-        // alert("=====================================");
-        // console.log(data.inputs);
-        this.roadInputData(data.inputs);
-      });
-    }
+    // tmpDocId를 통해 조회한 객체가 있다면 표시
+    const {inputs} = this.props;
     
+    if(inputs != undefined){
+      if(inputs.length>0){
+        this.roadInputData(inputs);
+      }
+    }
   }
 
 
@@ -377,8 +376,6 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
   private convertDataForAPI(boxDataList) {
     const {
       signerList,
-      view_w,
-      view_h
     } = this.state;
 
 
@@ -394,8 +391,6 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
         width,
         height
       } = data;
-
-      const {zoom: scale, pageWidth, pageHeight} = this.state;
 
       // const { x, y, w, h } = convertView(pageWidth, pageHeight, left, top, width, height);
       const x = left;
@@ -429,8 +424,6 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
         height
       } = data;
 
-      const {zoom: scale, pageWidth, pageHeight} = this.state;
-
       // const { x, y, w, h } = convertView(pageWidth, pageHeight, left, top, width, height);
       const x = left;
       const y = top;
@@ -460,8 +453,6 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
         height
       } = data;
 
-      const {zoom: scale, pageWidth, pageHeight} = this.state;
-
       // const { x, y, w, h } = convertView(pageWidth, pageHeight, left, top, width, height);
       const x = left;
       const y = top;
@@ -490,8 +481,6 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
         width,
         height
       } = data;
-
-      const {zoom: scale, pageWidth, pageHeight} = this.state;
 
       // const { x, y, w, h } = convertView(pageWidth, pageHeight, left, top, width, height);
       const x = left;
@@ -560,13 +549,13 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
     //   alert('저장 완료');
     // });
     setDocumentInfo(documentNo, docName, fileName, documentUrl, userId, dataList).then((result:any)  => {    
-      console.log(result);  
-      // if(data.code == '200'){
-      //   alert('저장 완료');
-      // }else{
-      //   alert('저장 처리중 에러 : ' + data.code);
-      // }
-      // return data;
+      // console.log(result);  
+      if(result.code == '200'){
+        alert('저장 완료');
+      }else{
+        alert('저장 처리중 에러 : ' + result.code);
+      }
+      return result;
     });
 
     return result;
@@ -643,7 +632,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
   }
 
   onInutboxAreaMouseUp = (e: React.MouseEvent) => {
-    const {newInputBox, scale} = this.state;
+    const {newInputBox, scale, pageNumber} = this.state;
     if(!newInputBox) {
       return;
     }
@@ -661,16 +650,13 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
     newInputBox.top = top;
     newInputBox.width = width;
     newInputBox.height = height;
+    newInputBox.page = pageNumber;
     
     this.addInputbox(newInputBox);
   }
 
-  onPageChange = (pageNumber: number, scrollTo: number) => {
-    this.setState({pageNumber}, () => {
-      if(scrollTo >= 0) {
-        window.scrollTo(0, scrollTo);
-      }
-    });
+  onPageChange = (pageNumber: number) => {
+    this.setState({pageNumber});
   }
 
 
@@ -699,6 +685,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
           <NewInputbox
             inputbox={this.state.newInputBox}
             users={signerList}
+            scale={scale}
           />
           }
           <div className='header'>

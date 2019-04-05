@@ -49,12 +49,16 @@ class PlainBoxForTextArea extends React.Component<IBoxForTextAreaProps, React.Co
       width: '100%',
       height: '100%',
       resize: 'none',
-      fontFamily: `${font}`,
-      fontSize: `${charSize}px`,
+      fontFamily: font,
+      // fontSize: `${charSize}px`,
+      fontSize: `${Number(charSize) * scale}px`,
       // boxSizing: 'border-box',
       backgroundColor: 'white',
       opacity: 0.7,
-      border: 'dotted 2px orange',
+      border: 'dotted 1.5px orange',
+      padding: 0,
+      margin: 0,
+      overflow: 'hidden',
     };
 
     const nonEditableStyle = {
@@ -71,6 +75,8 @@ class PlainBoxForTextArea extends React.Component<IBoxForTextAreaProps, React.Co
           top: y,
           width: w,
           height: h,
+          padding: 0,
+          margin: 0,
         }}
       >
         {/* <input type="text" */}

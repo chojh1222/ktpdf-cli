@@ -30,6 +30,7 @@ class BoxWithSignature extends Component<Props, any> {
       type,
       boxIndex,
       signerIndex,
+      minWidth,
     } = this.props.boxData;
 
     const {
@@ -75,6 +76,8 @@ class BoxWithSignature extends Component<Props, any> {
               cursor: 'se-resize',
           }
         }}
+        minWidth={minWidth * scale}
+        minHeight={minWidth * scale}
       >
         
         <SignatureMarker

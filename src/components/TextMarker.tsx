@@ -15,6 +15,7 @@ interface Props {
   deleteInputBox: (index: number) => void;
   onDoubleClick: () => void;
   className: string;
+  scale: number;
 }
 
 export default class TextMarker extends Component<Props, any> {
@@ -51,6 +52,20 @@ export default class TextMarker extends Component<Props, any> {
     $(e.currentTarget).find('.inputbox-header').hide();
   }
 
+  onBeforeInput = (e) => {
+    if(e.target.scrollHeight > e.target.offsetHeight) {
+      console.log('no more space for input!')
+      e.preventDefault();
+    }
+  }
+
+  onInput = (e) => {
+    if(e.target.scrollHeight > e.target.offsetHeight) {
+      console.log('no more space for input!')
+      e.preventDefault();
+    }
+  }
+
   render() {
     const {
       page,
@@ -63,6 +78,7 @@ export default class TextMarker extends Component<Props, any> {
 
     const {
       users,
+      scale,
     } = this.props;
 
 
@@ -107,7 +123,7 @@ export default class TextMarker extends Component<Props, any> {
           </div>
           <div
             className={`textbox-${boxIndex}`}
-            style={{width: '100%', height: '100%'}}
+            style={{width: '100%', height: '100%', textAlign: 'left'}}
             onMouseOver={this.onMouseOver}
             // onMouseLeave={this.onMouseLeave}
           >
@@ -121,15 +137,28 @@ export default class TextMarker extends Component<Props, any> {
                 width: '100%',
                 height: '100%',
                 fontFamily: fontFamily,
-                fontSize: fontSize,
+                fontSize: `${fontSize * scale}px`,
                 resize: 'none',
                 boxSizing: 'border-box',
                 backgroundColor: '#fff',
                 opacity: 0.7,
                 border: `1px solid ${backgroundColor}`,
+                // maxHeight: scale ? `calc(100% / ${scale})` : undefined,
+                // minHeight: scale ? `calc(100% / ${scale})` : undefined,
+                // maxWidth: scale ? `calc(100% / ${scale})` : undefined,
+                // minWidth: scale ? `calc(100% / ${scale})` : undefined,
+                // transform: scale ? `scale(${scale})` : undefined,
+                // transformOrigin: scale ? 'top left' : undefined,
+                overflow: 'hidden',
+                // fontWeight: 'bold',
+                padding: 0,
+                margin: 0,
+                // lineHeight: 1.2,
               }}
               placeholder="텍스트 입력란"
               onDoubleClick={this.props.onDoubleClick}
+              // onBeforeInput={this.onBeforeInput}
+              // onInput={this.onInput}
             />
             {/* {showCloseBtn && 
             // {true && 

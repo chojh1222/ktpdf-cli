@@ -6,29 +6,32 @@ import 'raf/polyfill';
 import * as React from 'react';
 import 'reset-css/reset.css';
 import DocumentContainer from '../../src/containers/desktop/Document';
-import { ISigner } from "../../src/interface/ISigner";
+import {getDocumentInfo} from "../../src/api/document/getDocumentInfo";
+import {getDocumentInfoForSigner} from "../../src/api/signer/getDocumentInfoForSinger";
+import {ISigner} from "../../src/interface/ISigner";
+import { pdfjs } from 'react-pdf';
+
+// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 interface IDocumentProps {
   documentNo: string;
   documentUrl: string;
   signerList: Array<ISigner>;
   
-  tmpDocId: string;
   regId: string;
   inputs:[];
 }
 
-// interface IDocumentInfoAPIResponse {
-//   doc: string;
-
-//   docId: string;
-//   docName: string;
-//   fileName: string;
-//   filePath: string;
-//   userId: string; 
-//   signers: Array<ISigner>;  
-//   inputs:[];
-// }
+interface IDocumentInfoAPIResponse {
+  doc: string;
+  docId: string;
+  docName: string;
+  fileName: string;
+  filePath: string;
+  userId: string; 
+  signers: Array<ISigner>;  
+  inputs:[];
+}
 
 const backgroundColorList = [
   '#F15F5F', // 'red',
@@ -55,12 +58,21 @@ const backgroundColorList = [
 
 const defaultBackgroundColor = '#fff';
 
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
 class Document extends React.Component<IDocumentProps, React.ComponentState> {
 
-  // static async getInitialProps({query}) {
-    // console.log('query = ', query)
-    // return {test: param};
-    
+  /*
+  static async getInitialProps({query}) {
+
     // 포탈에서 호출 시 시작
     // 아이디(템플릿아이디) 를 받아 조회하는 방식으로 변경될 예정
     // console.log("query 1 :: " + JSON.stringify(query));
@@ -86,9 +98,10 @@ class Document extends React.Component<IDocumentProps, React.ComponentState> {
     // let documentNo = query.docNo;
     // let {tmpDocId, regId } = query;
     // return {documentNo, tmpDocId, regId};
-  // }
+  }
+  */
 
-  constructor(props) {
+  constructor(props) {    
     super(props);
 
     this.state = {
@@ -104,27 +117,26 @@ class Document extends React.Component<IDocumentProps, React.ComponentState> {
   }
 
   componentDidMount() {
+
+    // url 에서 파라메터 파싱
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const documentNo = urlParams.get('docNo'); // 문서아이디
+    // let tmpDocNo = urlParams.get('tmpDocNo'); // 템플릿 문서 아이디
+    // const regId = urlParams.get('regId'); // 사용자아이디
+
+    const documentNo = getParameterByName('docNo', null); // 문서아이디
+    let tmpDocNo = getParameterByName('tmpDocNo', null); // 템플릿 문서 아이디
+    const regId = getParameterByName('regId', null); // 사용자아이디
+
+    if(tmpDocNo == null || tmpDocNo == ''){
+      console.log('tmpDocNo is null !!!');
+      tmpDocNo = "null";
+    }
+    console.log('documentNo = ', documentNo); 
+    console.log('tmpDocNo = ', tmpDocNo); 
+
     // console.log("componentDidMount>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    // const documentNo = this.props.documentNo;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const docNo = urlParams.get('docNo');
-    console.log('docNo = ', docNo); 
-
-    // docNo 로 db 조회
-
-    // 임시
-    this.setState({
-      documentNo: docNo,
-      documentUrl: 'http://localhost:8888/escDoc/pdf/sample.pdf',
-      signerList: [
-        { "signerId": "signer1", "signerNm": "생성자", "signerNo": 1 }, 
-        { "signerId": "signer2", "signerNm": "유저2", "signerNo": 2 }, 
-        { "signerId": "signer3", "signerNm": "유저3", "signerNo": 3 }
-      ],
-      regId: 'signer1',
-      tmpDocId: '',
-    })
+    // const documentNo = this.props.documentNo;    
     // const {tmpDocId, regId} = this.props;    
 
     // 템플릿 아이디가 있다면 기존 객체를 조회해본다.
@@ -142,37 +154,39 @@ class Document extends React.Component<IDocumentProps, React.ComponentState> {
     //   });
     // }
 
-    // 템플릿 아이디가 있다면 기존 객체를 조회해본다.
+    // api 서버에서 각종 정보를 조회한다.  
     // getDocumentInfo(documentNo)
-    // getDocumentInfo(documentNo, tmpDocId, regId)
-    //   .then((data: IDocumentInfoAPIResponse) => {
-    //     // this.setState({
-    //     //   // documentUrl: data.doc,
-    //     //   // documentNo: data.docId // 문서아이디  
-    //     //   // ,docName: data.docName
-    //     //   // ,fileName: data.fileName   
-    //     //   // ,documentUrl: data.filePath // 문서경로
-    //     //   // ,userId: data.userId
-    //     //   // ,signerList: data.signers
-    //     //   inputs: data.inputs
-    //     // })
-    //   });      
+    getDocumentInfo(documentNo, tmpDocNo, regId)
+      .then((data: IDocumentInfoAPIResponse) => {
+        console.log(data);
+        this.setState({          
+          // documentUrl: data.doc,
+          documentNo: data.docId // 문서아이디  
+          // ,docName: data.docName
+          // ,fileName: data.fileName   
+          ,documentUrl: data.filePath // 문서경로
+          // ,userId: data.userId
+          ,signerList: data.signers
+          ,inputs: data.inputs
+        })
+      });      
   }
 
 
   render() {
-    // const {documentNo} = this.props;
-    // const {documentUrl, signerList} = this.state;
-    // const {tmpDocId, regId} = this.props;
-    const {documentNo} = this.state;
-    const {documentUrl, signerList} = this.state;
-    const {tmpDocId, regId} = this.state;
+    console.log("render start");
     
+    
+    // const {documentNo} = this.props;
+    // const {documentNo} = this.props;
+    const {documentNo, documentUrl, signerList} = this.state;
+    // const {documentUrl, signerList} = this.props;
     const {docName, fileName} = this.state;
 
+    const {regId} = this.props;
     // console.log("regId : " + regId);
     const {inputs} = this.state;
-    console.log("====== index.tsx ->  render ");  
+    console.log(inputs);
 
     const users = signerList ? signerList.map((user, index) => ({
       ...user,
@@ -196,8 +210,7 @@ class Document extends React.Component<IDocumentProps, React.ComponentState> {
           docName={docName}
           fileName={fileName}
           userId={regId}
-          inputs={inputs}
-          tmpDocId={tmpDocId}
+          inputs={inputs}          
         />
       </div>
     );

@@ -5,8 +5,6 @@ import apiPath from "../enum/apiPath";
 export async function getDocumentInfo(documentNo: string, tmpDocId: string, userId: string) {
   if(!documentNo) return false;
 
-  if(tmpDocId=='') tmpDocId = 'NULL';
-
   // const DOCUMENT_INFO_API_PATH = `${apiPath.CONTRACT.DOCUMENT}/${documentNo}`;
   const DOCUMENT_INFO_API_PATH = `${apiPath.CONTRACT.DOCUMENT}/${documentNo}/${tmpDocId}/${userId}`;
   // console.log('DOCUMENT_INFO_API_PATH = ' + DOCUMENT_INFO_API_PATH);

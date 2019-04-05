@@ -1,5 +1,6 @@
 import * as React from "react";
 import SelectBox from "./SelectBox";
+import { fontList, fontSizeList } from '../util/fontCode';
 
 interface IPopup {
   updateInputBox: (boxIndex: number, update: object) => void;
@@ -8,17 +9,21 @@ interface IPopup {
   fontSize: number;
 }
 
-const fontFamilyList = ['Times-Roman', 'Courier-Bold', 'Dotum', 'Gulim', 'Batang', 'Gungsuh'];
-const fontFamilyNmList = ['Times-Roman', 'Courier-Bold', '돋움', '굴림', '바탕', '궁서'];
-const fontList=[
-  // {fontFamily: 'Times-Roman', fontName: 'Times-Roman'},
-  // {fontFamily: 'Courier-Bold', fontName: 'Courier-Bold'},
-  {fontFamily: 'Dotum', fontName: '돋움'},
-  {fontFamily: 'Gulim', fontName: '굴림'},
-  // {fontFamily: 'Batang', fontName: '바탕'},
-  // {fontFamily: 'Gungsuh', fontName: '궁서'},
-]
-const fontSizeList = [12, 14, 16, 18, 20, 24];
+// const fontFamilyList = ['Times-Roman', 'Courier-Bold', 'Dotum', 'Gulim', 'Batang', 'Gungsuh'];
+// const fontFamilyNmList = ['Times-Roman', 'Courier-Bold', '돋움', '굴림', '바탕', '궁서'];
+// const fontList=[
+//   // {fontFamily: 'Times-Roman', fontName: 'Times-Roman'},
+//   // {fontFamily: 'Courier-Bold', fontName: 'Courier-Bold'},
+//   // {fontFamily: 'Dotum', fontName: '돋움'},
+//   // {fontFamily: "'Noto Sans KR', sans-serif", fontName: '본고딕'},
+//   // {fontFamily: "'Noto Serif KR', serif", fontName: '본명조'},
+//   // {fontFamily: 'Malgun', fontName: '맑은 고딕'},
+//   {fontFamily: 'Batang', fontName: '바탕'},
+//   {fontFamily: 'Gulim', fontName: '굴림'},
+//   // {fontFamily: 'Batang', fontName: '바탕'},
+//   // {fontFamily: 'Gungsuh', fontName: '궁서'},
+// ]
+// const fontSizeList = [12, 14, 16, 18, 20, 24];
 
 
 

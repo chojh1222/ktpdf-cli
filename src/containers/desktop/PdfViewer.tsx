@@ -6,6 +6,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 
 
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = `pdf.worker.js`;
 
 
 
@@ -14,7 +15,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 interface Props {
   documentUrl: string;
   scale: number;
-  onPageChange: (pageNumber: number, scrollTo: number) => void;
+  onPageChange: (pageNumber: number) => void;
   pageNumber: number;
 }
 
@@ -29,6 +30,8 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
 
     this.getNewPdfItem = this.getNewPdfItem.bind(this);
   }
+
+  scrollTo = -1;
 
   pageRendering = false;
 
@@ -48,9 +51,12 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
   }
 
   handleMouseWheel = e => {
-    console.log($(window).scrollTop(), $(window).height(), $(document).height())
+    // console.log($(window).scrollTop(), $(window).height(), $(document).height())
     if(this.pageRendering) {
       console.log('page still rendering!')
+      return;
+    }
+    if( this.thumbnail.contains(e.target) ) {
       return;
     }
 
@@ -65,7 +71,8 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
             console.log('setting page ', pageNumber)
             e.preventDefault()
             this.pageRendering = true;
-            this.props.onPageChange(pageNumber, document.body.scrollHeight);
+            this.scrollTo = document.body.scrollHeight;
+            this.props.onPageChange(pageNumber);
             // window.scrollTo(0,document.body.scrollHeight);
           }
         }
@@ -81,7 +88,8 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
             console.log('setting page ', pageNumber)
             e.preventDefault();
             this.pageRendering = true;
-            this.props.onPageChange(pageNumber, 0);
+            this.scrollTo = 0;
+            this.props.onPageChange(pageNumber);
             // window.scrollTo(0, 0)
           }
         }
@@ -90,7 +98,7 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
 
 
   componentDidUpdate(_, prevState): void {
-  
+    
   }
 
   private getNewPdfItem(e: React.MouseEvent) {
@@ -109,16 +117,30 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
 
   onPageLoadSuccess = (page) => {
     // console.log('Document.tsx PageLoadSuccess')
+    if(this.scrollTo !== -1) {
+      window.scrollTo(0, this.scrollTo);
+      this.scrollTo = -1;
+    }
   }
+
+  thumbnail = null;
+  curThumbnail = null;
 
   onPageRenderSuccess = (page) => {
     console.log('Document.tsx PageRenderSuccess')
     this.pageRendering = false;
-    // console.log(page.width, page.height)
-    this.setState({
-      pageWidth: page.width,
-      pageHeight: page.height
-    })
+    
+    if( !this.isElementInViewport(this.curThumbnail) ) {
+      console.log('ElementNotInViewport!')
+
+      let scrollTo = this.curThumbnail.offsetTop;
+      let padding = Number($(this.thumbnail).css('padding-top').replace('px', '') - 1);
+      scrollTo -= padding;
+      // this.thumbnail.scrollTo(0, scrollTo)
+      this.thumbnail.scrollTop = scrollTo;
+    }
+
+    
   }
 
 
@@ -126,7 +148,18 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
   
   }
 
+  
 
+  isElementInViewport = (el) => {
+    var rect = el.getBoundingClientRect();
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+    );
+  }
   
 
   public render(): JSX.Element {
@@ -141,8 +174,7 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
 
     return (
           <React.Fragment>
-            <div className="thumbnail">
-
+            <div className="thumbnail" ref={ref => this.thumbnail = ref}>
               <ul>
                       <Document
                         file={this.props.documentUrl}
@@ -153,6 +185,7 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
                             <li 
                               key={index}
                               className={pageNumber === index+1  ? 'on' : undefined}
+                              ref={ref => {if(pageNumber === index+1) this.curThumbnail = ref} }
                             >
                               <a data-index={index} onClick={this.getNewPdfItem}>
                                 <Page
@@ -164,7 +197,9 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
                                   // onLoadSuccess={page => console.log(`thumbnail page-${page.pageNumber} loaded`)}
                                   onRenderSuccess={this.onThumbnailRenderSuccess}
                                   scale={0.22}
-                                />
+                                >
+                                  <span className="thumbnail-label">{index + 1}</span>
+                                </Page>
                               </a>
                             </li>
                           ),
@@ -174,7 +209,6 @@ export default class PdfViewer extends React.Component<Props, React.ComponentSta
 
             </div>
             <div className="editor-view">
-              
               <Document
                 className='document-wrapper'
                 file={this.props.documentUrl}

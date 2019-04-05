@@ -123,6 +123,8 @@ class BoxWithRadio extends Component<Props, any> {
           // minHeight={this.radioMarker && this.radioMarker.state.mode === 'horizontal' ? 20 * scale : undefined}
           // maxWidth={maxWidth ? maxWidth * scale : undefined}
           // maxHeight={maxHeight ? maxHeight * scale : undefined}
+          minWidth={this.radioMarker && this.radioMarker.state.mode === 'vertical' ? minWidth * scale : undefined}
+          minHeight={this.radioMarker && this.radioMarker.state.mode === 'horizontal' ? minWidth * scale : undefined}
         >
           
           <RadioMarker

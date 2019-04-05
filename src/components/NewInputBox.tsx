@@ -8,8 +8,9 @@ import TextMarker from './TextMarker';
 import { Input } from 'src/interface/Input';
 
 interface Props {
-  inputbox: Input;
+  inputbox: InputBox;
   users: Array<ISigner>;
+  scale: number;
 }
 
 export default class NewInputbox extends Component<Props, null> {
@@ -22,6 +23,7 @@ export default class NewInputbox extends Component<Props, null> {
     const {
       inputbox,
       users,
+      scale,
     } = this.props;
 
     return (
@@ -44,6 +46,7 @@ export default class NewInputbox extends Component<Props, null> {
                   deleteInputBox={undefined}
                   onDoubleClick={undefined}
                   className={`new-text-marker`}
+                  scale={scale}
                 />
             }  
             

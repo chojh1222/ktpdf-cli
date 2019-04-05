@@ -31,14 +31,16 @@ class Contract extends React.Component<any, React.ComponentState> {
 
   componentDidMount() {
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const documentNo = urlParams.get('docNo');
-    const signerNo = urlParams.get('signerNo');
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const documentNo = urlParams.get('docNo');
+    // const signerNo = urlParams.get('signerNo');
 
-    // const { signerNo, documentNo } = this.props;
+    const { signerNo, documentNo } = this.props;
+    console.log('then data ==================================');
+    console.log(signerNo);
     getDocumentInfoForSigner(documentNo, signerNo)
       .then((data: any) => {
-        console.log('then data ==================================')
+        
         console.log(data);
         this.setState({
           signer: data.signer,
@@ -54,8 +56,10 @@ class Contract extends React.Component<any, React.ComponentState> {
     // const { documentNo } = this.props;
     const { documentNo } = this.state;
     const { signer, inputs, documentUrl } = this.state;
-console.log("inputs.length : " + inputs.length);
-    if(inputs.length < 1) return null;
+
+    if(inputs != undefined){
+      if(inputs.length < 1) return null;
+    }
 
     return(
       <div>

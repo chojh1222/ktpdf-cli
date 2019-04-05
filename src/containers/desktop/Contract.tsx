@@ -14,7 +14,7 @@ import PdfViewer from "./PdfViewer";
 import "./reset.css";
 import $ from 'jquery';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const styled = require('./common.css');
 
@@ -187,9 +187,14 @@ class ContractContainer extends React.Component<IContractProps, React.ComponentS
     return true;
   }
 
-  private saveContractInfo() {
+  private saveContractInfo(strHash) {
     console.log('saveContractInfo')
-    console.log(this.state.inputs)
+    // console.log(this.state.inputs)
+
+    // 포탈에서 넘어온 해시값
+    // const userhash = strHash;    
+    const userHash = 'testhash1234';
+    
     const { documentNo } = this.props;
     const { inputs, signer } = this.state;
     const signerNo = signer.signerNo;
@@ -206,10 +211,7 @@ class ContractContainer extends React.Component<IContractProps, React.ComponentS
       return input;
     });
 
-    console.log('newInputs ============================')
-    console.log(newInputs)
-
-    setDocumentInfoForSigner(documentNo, signerNo, {inputs: newInputs}).then((data:any) => {      
+    setDocumentInfoForSigner(documentNo, signerNo, {inputs: newInputs, userHash}).then((data:any) => {      
       if(data.code == '200'){
         alert('저장 완료');
       }else{
@@ -366,7 +368,7 @@ class ContractContainer extends React.Component<IContractProps, React.ComponentS
   }
 
   onInputboxAreaMouseUp = (e: React.MouseEvent) => {
-    const {newMemo, scale} = this.state;
+    const {newMemo, scale, pageNumber} = this.state;
     if(!newMemo) {
       return;
     }
@@ -385,6 +387,7 @@ class ContractContainer extends React.Component<IContractProps, React.ComponentS
     newMemo.y = y;
     newMemo.w = w;
     newMemo.h = h;
+    newMemo.page = pageNumber;
     
     this.addMemo(newMemo);
   }

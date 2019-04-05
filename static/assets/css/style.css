@@ -1,4 +1,11 @@
 @charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&subset=korean');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+KR&subset=korean');
+
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&subset=korean');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo&subset=korean');
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -4030,23 +4037,40 @@ input::placehodler {
 .service .editor .edit-body .thumbnail {
   position: fixed;
   /* float: left; */
-  height: 100%;
+  /* height: 100%; */
   width: 10.625rem;
   background-color: gray;
   overflow-y: scroll;
   padding-top: 0.875rem;
   z-index: 500;
   left: 0;
+  top: 4.4rem;
+  bottom: 0;
 }
 .service .editor .edit-body .thumbnail li {
   display: block;
   width: 8.125rem;
   margin: 0 auto 0.875rem;
   box-sizing: content-box;
+  border: 0.125rem solid transparent;
 }
+
+.service .editor .edit-body .thumbnail li:not(.on) canvas {
+  opacity: 0.7;
+}
+
 .service .editor .edit-body .thumbnail li img {
   display: inline-block;
   width: 100%;
+}
+.service .editor .edit-body .thumbnail li .thumbnail-label {
+  color: #292929;
+  font-size: 22px;
+  font-weight: 700;
+  left: 10px;
+  top: 10px;
+  position: absolute;
+  text-shadow: 0 0 15px hsla(0,0%,100%,.4);
 }
 .service .editor .edit-body .thumbnail li.on {
   border: 0.125rem solid #2cbbb6;
@@ -4095,6 +4119,7 @@ input::placehodler {
   height: 100%;
   /* height: 35.625rem; */
   padding: 0.625rem 1.25rem;
+  z-index: 100000;
 }
 .service .editor .edit-body .edit-pallet .input-select {
   width: 100%;
@@ -4232,3 +4257,4 @@ input::placehodler {
   top: 0;
   z-index: 10;
 }
+
