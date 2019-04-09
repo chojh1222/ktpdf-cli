@@ -77,7 +77,7 @@ class PlainBoxForCheckbox extends React.Component<IBoxForCheckboxProps, React.Co
       // border: '1px solid #000',
       backgroundColor: '#fff',
       opacity: 0.7,
-      border: 'dotted 2px black',
+      border: 'solid 2px black',
     }
 
     return (

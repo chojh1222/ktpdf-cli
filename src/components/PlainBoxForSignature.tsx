@@ -1,5 +1,7 @@
 import * as React from "react";
 import { SignInput } from "src/interface/Input";
+import { IconContext } from "react-icons";
+import { FaStamp } from "react-icons/fa";
 
 interface IBoxForSignatureProps {
   input: SignInput;
@@ -58,7 +60,21 @@ class PlainBoxForSignature extends React.Component<IBoxForSignatureProps, React.
       // border: '1px solid #000',
       backgroundColor: '#fff',
       opacity: 0.7,
-      border: 'dotted 2px black',
+      border: 'dotted 1.5px black',
+    }
+
+    const stampicon = {
+      color: '#FF4136', 
+      className: "global-class-name", 
+      size: "80%",
+      padding: 0,
+      margin: 0,
+      
+      // width: '100%',
+      // height: '100%',
+      style: {
+        // position: 'absolute',
+      },
     }
 
     return (
@@ -76,6 +92,9 @@ class PlainBoxForSignature extends React.Component<IBoxForSignatureProps, React.
           // : <span>{name} signature</span>
           : <span></span>
         }
+        <IconContext.Provider value={stampicon}>
+          <FaStamp />
+        </IconContext.Provider>
       </div>
     );
   }
