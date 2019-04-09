@@ -85,7 +85,7 @@ class ContractContainer extends React.Component<IContractProps, React.ComponentS
   }
 
   componentDidMount() {
-  
+    
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {

@@ -9,15 +9,16 @@ import HTML5Backend from "react-dnd-html5-backend";
 import {DragDropContextProvider} from "react-dnd";
 import {getDocumentInfoForSigner} from "../../src/api/signer/getDocumentInfoForSinger";
 import Head from 'next/head'
+import {getParameterByName} from '../../src/util/getParameterByName'
 
 class Contract extends React.Component<any, React.ComponentState> {
 
-  static async getInitialProps({ query }) {
-    console.log('getInitialProps!')
-    const { docNo, signerNo } = query;
+  // static async getInitialProps({ query }) {
+  //   console.log('getInitialProps!')
+  //   const { docNo, signerNo } = query;
 
-    return {signerNo, documentNo: docNo}
-  }
+  //   return {signerNo, documentNo: docNo}
+  // }
 
   constructor(props) {
     super(props);
@@ -31,11 +32,11 @@ class Contract extends React.Component<any, React.ComponentState> {
 
   componentDidMount() {
 
-    // const urlParams = new URLSearchParams(window.location.search);
-    // const documentNo = urlParams.get('docNo');
-    // const signerNo = urlParams.get('signerNo');
+    const signerNo = getParameterByName('signerNo', null);
+    const documentNo = getParameterByName('docNo', null);
 
-    const { signerNo, documentNo } = this.props;
+    // const { signerNo, documentNo } = this.props;
+    
     console.log('then data ==================================');
     console.log(signerNo);
     getDocumentInfoForSigner(documentNo, signerNo)

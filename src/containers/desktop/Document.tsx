@@ -198,6 +198,9 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
   }
 
   componentDidMount() {
+
+    
+
     console.log("Document.tsx ============================== componentDidMount ");
     this.initBoxData();
 
@@ -507,7 +510,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
   }
 
   // 저장처리
-  private updateDocumentInfo() {
+  updateDocumentInfo = () => {
     const {documentNo, docName, fileName, documentUrl, userId, signerList} = this.props;
     const {boxDataList} = this.state;
 
@@ -732,7 +735,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
                 {/* <li><a><span className="icon-memo"></span>메모 입력</a></li> */}
                 <li><a onClick={this.updateDocumentInfo}>저장</a></li>
               </ul>
-
+                
             </div>
           </div>
         </div>

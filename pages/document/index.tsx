@@ -10,6 +10,7 @@ import {getDocumentInfo} from "../../src/api/document/getDocumentInfo";
 import {getDocumentInfoForSigner} from "../../src/api/signer/getDocumentInfoForSinger";
 import {ISigner} from "../../src/interface/ISigner";
 import { pdfjs } from 'react-pdf';
+import {getParameterByName} from '../../src/util/getParameterByName'
 
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -58,15 +59,6 @@ const backgroundColorList = [
 
 const defaultBackgroundColor = '#fff';
 
-function getParameterByName(name, url) {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, '\\$&');
-  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-      results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
 
 class Document extends React.Component<IDocumentProps, React.ComponentState> {
 
