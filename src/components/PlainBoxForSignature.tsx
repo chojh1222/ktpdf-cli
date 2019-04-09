@@ -19,7 +19,7 @@ class PlainBoxForSignature extends React.Component<IBoxForSignatureProps, React.
 
   showSignatureLayer() {
     const { boxIndex, controlSignLayer } = this.props;
-    controlSignLayer(boxIndex);
+    // controlSignLayer(boxIndex);
   }
 
   doNothing = () => {
