@@ -9,15 +9,16 @@ import HTML5Backend from "react-dnd-html5-backend";
 import {DragDropContextProvider} from "react-dnd";
 import {getCompleteInfo} from "../../src/api/complete/getCompleteInfo";
 import ContractContainer from '../../src/containers/desktop/Contract';
-import Head from 'next/head'
+import Head from 'next/head';
+import {getParameterByName} from '../../src/util/getParameterByName';
 
 class Complete extends React.Component<any, React.ComponentState> {
 
-  static async getInitialProps({ query }) {
-    const { docNo, signerNo } = query;
+  // static async getInitialProps({ query }) {
+  //   const { docNo, signerNo } = query;
 
-    return {signerNo, documentNo: docNo}
-  }
+  //   return {signerNo, documentNo: docNo}
+  // }
 
   constructor(props) {
     super(props);
@@ -30,20 +31,28 @@ class Complete extends React.Component<any, React.ComponentState> {
   }
 
   componentDidMount() {
-    const { signerNo, documentNo } = this.props;
+
+    const signerNo = getParameterByName('signerNo', null);
+    const documentNo = getParameterByName('docNo', null);
+
+    // const { signerNo, documentNo } = this.props;
+
     getCompleteInfo(documentNo, signerNo)
       .then((data: any) => {
         // console.log(data.inputs);
         this.setState({
           signer: data.signer,
           inputs: data.inputs,
-          documentUrl: data.filePath
+          documentUrl: data.filePath,
+          documentNo,
+          signerNo
         });
       });
   }
 
   render() {
-    const { documentNo } = this.props;
+    // const { documentNo } = this.props;
+    const { documentNo } = this.state;
     const { signer, inputs, documentUrl } = this.state;
     
     //console.log("inputs.length : " + inputs.length);
@@ -53,7 +62,8 @@ class Complete extends React.Component<any, React.ComponentState> {
       <div>
         <Head>
           <title>kt - contract</title>
-          <link href="/assets/css/style.css" rel="stylesheet" />
+          {/* <link href="/assets/css/style.css" rel="stylesheet" /> */}
+          <link href="/static/assets/css/style.css" rel="stylesheet" />
         </Head>
         <DragDropContextProvider backend={HTML5Backend}>
           <ContractContainer
