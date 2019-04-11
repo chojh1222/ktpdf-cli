@@ -34,7 +34,7 @@ export default class NewInputbox extends Component<Props, null> {
                 left: inputbox.left,
                 top: inputbox.top,
                 position: 'absolute',
-                zIndex: 100000,
+                zIndex: 1000000,
                 pointerEvents: 'none',
             }}
         >

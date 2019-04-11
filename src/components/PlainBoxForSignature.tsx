@@ -21,7 +21,7 @@ class PlainBoxForSignature extends React.Component<IBoxForSignatureProps, React.
 
   showSignatureLayer() {
     const { boxIndex, controlSignLayer } = this.props;
-    // controlSignLayer(boxIndex);
+    controlSignLayer(boxIndex);
   }
 
   doNothing = () => {
@@ -58,8 +58,10 @@ class PlainBoxForSignature extends React.Component<IBoxForSignatureProps, React.
     const editableStyle = {
       ...nonEditableStyle,
       // border: '1px solid #000',
-      backgroundColor: '#fff',
-      opacity: 0.7,
+      // backgroundColor: '#fff',
+      // opacity: 0.7,
+      backgroundColor: 'transparent',
+      opacity: 1,
       border: 'dotted 1.5px black',
     }
 
@@ -73,6 +75,7 @@ class PlainBoxForSignature extends React.Component<IBoxForSignatureProps, React.
       // width: '100%',
       // height: '100%',
       style: {
+        opacity: 0.7,
         // position: 'absolute',
       },
     }
@@ -90,11 +93,10 @@ class PlainBoxForSignature extends React.Component<IBoxForSignatureProps, React.
             height={`${h}px`}
           />
           // : <span>{name} signature</span>
-          : <span></span>
+          : <IconContext.Provider value={stampicon}>
+            <FaStamp />
+          </IconContext.Provider>
         }
-        <IconContext.Provider value={stampicon}>
-          <FaStamp />
-        </IconContext.Provider>
       </div>
     );
   }

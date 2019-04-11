@@ -116,13 +116,13 @@ class Document extends React.Component<IDocumentProps, React.ComponentState> {
     // let tmpDocNo = urlParams.get('tmpDocNo'); // 템플릿 문서 아이디
     // const regId = urlParams.get('regId'); // 사용자아이디
 
-    // const documentNo = getParameterByName('docNo', null); // 문서아이디
-    // let tmpDocNo = getParameterByName('tmpDocNo', null); // 템플릿 문서 아이디
-    // const regId = getParameterByName('regId', null); // 사용자아이디
+    const documentNo = getParameterByName('docNo', null); // 문서아이디
+    let tmpDocNo = getParameterByName('tmpDocNo', null); // 템플릿 문서 아이디
+    const regId = getParameterByName('regId', null); // 사용자아이디
 
-    const documentNo = window.docNo; // 문서아이디
-    let tmpDocNo = window.tmpDocNo; // 템플릿 문서 아이디
-    const regId = window.regId; // 사용자아이디
+    // const documentNo = window.docNo; // 문서아이디
+    // let tmpDocNo = window.tmpDocNo; // 템플릿 문서 아이디
+    // const regId = window.regId; // 사용자아이디
 
     if(tmpDocNo == null || tmpDocNo == ''){
       console.log('tmpDocNo is null !!!');
