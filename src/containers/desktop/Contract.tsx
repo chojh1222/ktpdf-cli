@@ -11,7 +11,7 @@ import SignatureLayer from "../../components/SignatureLayer";
 import { ISigner } from "../../interface/ISigner";
 import { deepCopy } from "../../util/deepCopy";
 import PdfViewer from "./PdfViewer";
-import "./reset.css";
+// import "./reset.css";
 import $ from 'jquery';
 
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;

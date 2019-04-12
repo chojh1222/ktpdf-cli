@@ -9,7 +9,7 @@ import { ISigner } from "../../interface/ISigner";
 import { deepCopy } from "../../util/deepCopy";
 import { fontList, fontSizeList } from '../../util/fontCode';
 import PdfViewer from "./PdfViewer";
-import "./reset.css";
+// import "./reset.css";
 
 
 
