@@ -679,7 +679,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
     const curPageInputBox = boxDataList.filter(box => box.page === pageNumber);
 
     return (
-      <div className="container service">
+      // <div className="container service">
         <div className='editor'
           onMouseMove={this.handleMouseMove}
         >
@@ -739,7 +739,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
             </div>
           </div>
         </div>
-      </div>
+      // </div>
     );
   }
 }
