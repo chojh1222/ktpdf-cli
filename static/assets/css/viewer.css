@@ -44,6 +44,10 @@ body {
     /* overflow: hidden; */
 }
 
+.service .editor .edit-body .edit-pallet a {
+    cursor: pointer;
+}
+
 .service .editor .edit-body .editor-view .document-wrapper {		
     text-align: center;		
 }		
