@@ -1,20 +1,20 @@
 body {
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .container {
-    min-width: unset;
-    min-height: unset;
+    /* min-width: unset;
+    min-height: unset; */
 }
 
 .service .editor {
     /* padding: 0 1.25rem; */
-    padding: 0;
+    /* padding: 0; */
 }
 
 .service .editor .edit-body {
     /* height: 36.875rem; */
-    height: calc(100vh - 4.375rem);
+    /* height: calc(100vh - 4.375rem); */
 }
 
 .service .editor .edit-body .thumbnail li {
@@ -40,8 +40,8 @@ body {
 }
 
 .service .editor .edit-body .edit-pallet {
-    height: calc(100% - 1.25rem);
-    overflow: hidden;
+    /* height: calc(100% - 1.25rem); */
+    /* overflow: hidden; */
 }
 
 .service .editor .edit-body .editor-view .document-wrapper {		
