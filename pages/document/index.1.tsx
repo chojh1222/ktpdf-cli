@@ -1,7 +1,7 @@
 import 'raf/polyfill';
 import 'es6-shim';
 import 'es6-promise';
-import 'reset-css/reset.css';
+// import 'reset-css/reset.css';
 import "@babel/polyfill";
 import * as React from 'react';
 import DocumentContainer from '../../src/containers/desktop/Document';

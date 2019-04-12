@@ -1,10 +1,10 @@
+// import 'reset-css/reset.css';
 import "@babel/polyfill";
 import 'es6-promise';
 import 'es6-shim';
 import Head from 'next/head';
 import 'raf/polyfill';
 import * as React from 'react';
-import 'reset-css/reset.css';
 import DocumentContainer from '../../src/containers/desktop/Document';
 import {getDocumentInfo} from "../../src/api/document/getDocumentInfo";
 import {getDocumentInfoForSigner} from "../../src/api/signer/getDocumentInfoForSinger";

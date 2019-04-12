@@ -1,7 +1,7 @@
 import 'raf/polyfill';
 import 'es6-shim';
 import 'es6-promise';
-import 'reset-css/reset.css';
+// import 'reset-css/reset.css';
 import * as React from 'react';
 import Index from '../src/containers/desktop/Index';
 
