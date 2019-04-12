@@ -53,8 +53,8 @@ var kt = {
 		});
 		
 		// 2depth 닫기
-		$('.depth-02').mouseleave(function(){
-			console.log("out");
+		$('.depth-02-wrap').mouseleave(function(){
+			// console.log("out");
 			$('.depth-02-wrap').removeClass('on');
 		});
 
@@ -221,10 +221,39 @@ var kt = {
 
 		})
 	},
+	validate: function(){
+		// validate
+		var vals = [];
 
+		// 일반 input(옵션 빼고)
+		for(var i=0; i < $('input').not('input:checkbox').not('input:radio').not('.option').length; i++){
+			var th = $('input').not('input:checkbox').not('input:radio').not('.option').eq(i);
+			var v = $('input').not('input:checkbox').not('input:radio').not('.option').eq(i).val() !== ""
+			// var idx = $('input').index(th);
+			vals.push(v);
+		}
+		// checkbox
+		for(var i=0; i < $('input[type="checkbox"]').not('.option').length; i++){
+			var th = $('input[type="checkbox"]').not('.option').eq(i);
+			var chked = $('input[type="checkbox"]').not('.option').eq(i).prop('checked');
+			// var idx = $('input[type="checkbox"]').index(th);
+			vals.push(chked);
+		}
+
+		var trues = $.inArray(false, vals);
+
+		return trues;
+
+	},
+	popClose: function(e){
+		$(e).parents('.pop-whole-wrap').css('display', 'none');
+	},
+	layerClose: function(e){
+		$(e).parents('.layer-pop-wrap').remove();
+	},
 	test: function(){
 		// alert('clicked');
-	}
+	},
 }
 
 var accordion = {
@@ -239,22 +268,10 @@ var accordion = {
 }
 
 
-// 회원가입 구분
-var joinType = {
-	select : function(){
-		$('.join-type a').click(function(e){
-			e.preventDefault();
-			if( $(this).hasClass('join-personal') ){	
-				$('.join-form .personal').show();
-				$('.join-form .group').hide();
-			} else if( $(this).hasClass('join-group') ){
-				$('.join-form .group').show();
-				$('.join-form .personal').hide();
-			}
 
-		});
-	}
-}
+// 모바일에서 팝업오픈시 스크롤 막기
+
+
 
 
 

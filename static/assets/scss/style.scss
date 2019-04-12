@@ -1,0 +1,40 @@
+
+
+@import '_partial/_functions.scss';
+@import '_partial/_variables.scss';
+@import '_partial/_mixins.scss';
+@import '_partial/_reset.scss';
+@import '_partial/_common.scss';
+@import '_partial/_font.scss';
+@import '_partial/_icons.scss';
+@import '_partial/_buttons.scss';
+@import '_partial/_dropdowns.scss';
+@import '_partial/_marker.scss';
+@import '_partial/_accordion.scss';
+@import '_partial/_inputs.scss';
+@import '_partial/_checkbox.scss';
+@import '_partial/_select.scss';
+@import '_partial/_tab.scss';
+@import '_partial/_tooltip.scss';
+@import '_partial/_popup.scss';
+@import '_partial/_table-grid.scss';
+@import '_partial/_pagination.scss';
+@import '_partial/_chat.scss';
+
+// 반응형 사이즈
+// @import '_partial/_mobile_Large.scss';
+@import '_partial/_pc.scss';
+@import '_partial/_mobile.scss';
+
+// 메인
+@import '_partial/_main_banner.scss';
+@import '_partial/_sub_banner.scss';
+@import '_partial/_gnb.scss';
+@import '_partial/_footer.scss';
+@import '_partial/_topanchor.scss';
+@import '_partial/_login.scss';
+
+//서비스
+@import '_partial/_service.scss';
+
+

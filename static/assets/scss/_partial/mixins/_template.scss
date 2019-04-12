@@ -1,0 +1,58 @@
+// mixin 컨테이너 타입 
+	// 풀사이즈 타입
+	@mixin con-wide-type{
+		min-width: $container-width-pc;
+		width: 100%;
+		margin: 0;
+	}
+	// 노멀 타입
+	@mixin con-normal-type{
+		width: $container-width-pc;
+		margin: 0 auto;
+	}
+
+	@mixin con-pad{
+		width: 100%;
+		padding: 0 $pad-side;
+	}
+
+	@mixin screen-fit{
+		// position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: block;
+		height: rem(110);
+		box-sizing: content-box;
+		margin-top: $btn-fit-pad-top;
+		.btn{
+			position: absolute;
+			// width: calc(100% + #{$pad-side});
+			left: 0;
+			margin-top: 0;
+			height: $fit-btn-height;
+			text-align: center;
+			border-radius: 0;
+		}
+	}
+	@mixin mobilefit-in-pc{
+		margin: 0 auto;
+		max-width: rem(500);
+		width: 100%;
+	}
+
+	@mixin bottom-btn-wrap{
+		padding-top: $btn-wrap-top; 
+		padding-bottom: $btn-wrap-bottom; 
+	}
+	@mixin bottom-btn-wrap-pc{
+		padding-top: calc(#{$btn-wrap-top} / 2); 
+		padding-bottom: calc(#{$btn-wrap-bottom} / 2); 
+	}
+	@mixin dashboard-template{
+		background-color: #ffffff;
+		width: rem(550);
+		margin: 0 auto;
+		border: rem(1) solid $border-gray;
+		border-radius: rem(16);
+	}

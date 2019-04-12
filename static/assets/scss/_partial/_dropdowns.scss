@@ -1,0 +1,106 @@
+.dropdown{
+	
+	box-sizing: border-box;
+
+	@mixin dropdown-menu{
+		display: none;
+		position: absolute;
+		min-width: $dropdown-default-width;
+		overflow: hidden;
+		background-color: #ffffff;
+		top: $dropdown-default-height;
+		li{
+			padding: rem(3);
+			&:hover{
+				background-color: lightgray;
+			};
+			a{
+				display: block;
+				font-size: rem(14);
+
+			}
+		}
+	}
+	@mixin toggle{
+		display: inline-block;
+		position: relative;
+		font-size: rem(14);
+		border: rem(1) solid $default-color;
+		border-radius: $dropdown-default-radius;
+		padding: $dropdown-default-padding;
+		min-width: $dropdown-default-width;
+	}
+	@mixin toggle-after{
+		content: '';
+		display: inline-block;
+		position: absolute;
+		right: rem(22);
+		width: rem(9);
+		height: rem(5);
+		background-image: url(../images/icon-select.png);
+		background-repeat: no-repeat;
+	    top: 50%;
+	    transform: rotate(180deg) translateY(50%);
+	}
+	@mixin toggle-on{
+		transform: rotate(0deg) translateY(-50%);
+	}
+
+	&.complementary{
+		.toggle{
+			@include toggle;
+			color: $complementary-color;
+			border-color: darken($complementary-color, 30%);
+			&.on:after{
+				@include toggle-after;
+				border-color: darken($complementary-color, 30%);
+				@include toggle-on;
+			}
+		}
+		.toggle:after{
+			@include toggle-after;
+			border-color: darken($complementary-color, 30%);
+		}
+		.dropdown-menu{
+			@include dropdown-menu;
+		}
+	}
+	&.primary{
+		.toggle{
+			@include toggle;
+			color: $default-color;
+			border-color: $main-color;
+			text-align: left;
+			&.on:after{
+				@include toggle-after;
+				background-image: url(../images/icon-accor-arrow.png);
+				width: rem(15);
+				height: rem(11);
+				border-color: darken($main-color, 30%);
+				@include toggle-on;
+			}
+		}
+		.toggle:after{
+			@include toggle-after;
+			background-image: url(../images/icon-accor-arrow.png);
+			width: rem(15);
+			height: rem(11);
+			background-size: contain;
+		}
+		.dropdown-menu{
+			@include dropdown-menu;
+			left: 0;
+			border: rem(1) solid $border-gray;
+			z-index: 1;
+			li{
+				background-color: #ffffff;
+				border-bottom: rem(1) solid $border-gray;
+				padding: rem(10);
+			}
+		}
+
+	}
+	&.disable{
+
+	}
+}

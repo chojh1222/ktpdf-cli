@@ -1,0 +1,16 @@
+.marker{
+	position: relative;
+	font-weight: 500;
+	z-index: 1;
+	&:after{
+		content: '';
+		position: absolute;
+		bottom: rem(-3);
+		left: 0;
+		height: rem(20);
+		width: 100%;
+		background-color: $main-color-another;
+		z-index: -1;
+	}
+	
+}

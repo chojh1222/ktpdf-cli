@@ -196,8 +196,8 @@ class Document extends React.Component<IDocumentProps, React.ComponentState> {
       <div>
         <Head>
           <title>kt - document</title>
-          {/* <link href="/assets/css/style.css" rel="stylesheet" /> */}
-          <link href="/static/assets/css/style.css" rel="stylesheet" />
+          <link href="/assets/css/style.css" rel="stylesheet" />
+          <link href="/assets/css/viewer.css" rel="stylesheet" />
         </Head>
         <DocumentContainer
           documentUrl={documentUrl}

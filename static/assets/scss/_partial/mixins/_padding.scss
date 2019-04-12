@@ -1,0 +1,6 @@
+@mixin pad-normal{
+	padding: $pad-top-bottom $pad-side-normal;
+}
+@mixin pad-bold{
+	padding: $pad-top-bottom $pad-side-bold;
+}
