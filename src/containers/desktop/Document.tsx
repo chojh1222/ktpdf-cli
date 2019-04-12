@@ -199,7 +199,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
 
   componentDidMount() {
 
-    
+    window.documentContainer = this;
 
     console.log("Document.tsx ============================== componentDidMount ");
     this.initBoxData();
@@ -733,7 +733,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
                 <li><a onClick={e => this.newInputBox('checkbox', e.pageX, e.pageY)}><span className="icon-checklist"></span>체크항목</a></li>
                 <li><a onClick={e => this.newInputBox('radio', e.pageX, e.pageY)}><span className="icon-selected-list"></span>선택항목</a></li>
                 {/* <li><a><span className="icon-memo"></span>메모 입력</a></li> */}
-                <li><a onClick={this.updateDocumentInfo}>저장</a></li>
+                {/* <li><a onClick={this.updateDocumentInfo}>저장</a></li> */}
               </ul>
                 
             </div>

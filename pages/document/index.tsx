@@ -195,7 +195,7 @@ class Document extends React.Component<IDocumentProps, React.ComponentState> {
     return (
       <div>
         <Head>
-          <title>kt - document</title>
+          <title>kt</title>
           {/* <link href="/static/assets/css/style.css" rel="stylesheet" /> */}
           <link href="/static/assets/css/viewer.css" rel="stylesheet" />
         </Head>

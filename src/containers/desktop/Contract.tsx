@@ -85,7 +85,7 @@ class ContractContainer extends React.Component<IContractProps, React.ComponentS
   }
 
   componentDidMount() {
-    
+    window.contractContainer = this;
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -548,7 +548,7 @@ class ContractContainer extends React.Component<IContractProps, React.ComponentS
                   <li><a onClick={this.newMemo}><span className="icon-memo"></span>메모 입력</a></li>
                 }
                 
-                <li><a onClick={this.props.completePage ? this.saveCompleteInfo : this.saveContractInfo}>저장</a></li>
+                {/* <li><a onClick={this.props.completePage ? this.saveCompleteInfo : this.saveContractInfo}>저장</a></li> */}
               </ul>
             </div>
           

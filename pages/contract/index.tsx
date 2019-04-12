@@ -32,8 +32,11 @@ class Contract extends React.Component<any, React.ComponentState> {
 
   componentDidMount() {
 
-    const signerNo = getParameterByName('signerNo', null);
-    const documentNo = getParameterByName('docNo', null);
+    // const signerNo = getParameterByName('signerNo', null);
+    // const documentNo = getParameterByName('docNo', null);
+
+    const signerNo = window.signerNo;
+    const documentNo = window.docNo;
 
     // const { signerNo, documentNo } = this.props;
     
@@ -65,7 +68,7 @@ class Contract extends React.Component<any, React.ComponentState> {
     return(
       <div>
         <Head>
-          <title>kt - contract</title>
+          <title>kt</title>
           {/* <link href="/static/assets/css/style.css" rel="stylesheet" /> */}
           <link href="/static/assets/css/viewer.css" rel="stylesheet" />
         </Head>
