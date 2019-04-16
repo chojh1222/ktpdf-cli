@@ -1,0 +1,141 @@
+.footer{
+	@include con-wide-type;
+	background-color: #434448;
+	height: 200px;
+	color: $complementary-color;
+	padding-top: 50px;
+	.wrap{
+		@include con-normal-type;
+		position: relative;
+		.logo {
+			display: inline-block;
+			vertical-align: top;
+			a{
+				display: inline-block;
+				width: rem(165);
+				height: rem(35);
+				background-image: url(../images/logo-white.png);
+				background-repeat: no-repeat;
+			}
+		}
+		.center{
+			display: inline-block;
+			margin-left: 100px;
+			ul li{
+				font-size: rem(15);
+				display: inline-block;
+				padding-right: rem(25);
+				margin-right: rem(25);
+				border-right: 1px solid #7c7c7f;
+			}
+			a{
+				color: $complementary-color;
+			}
+			p{
+				color: darken($complementary-color, 40%);
+				margin-top: 20px;
+			}
+		}
+		.dropdown{
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	}
+}
+
+@media screen and (max-width: 1000px){
+	.footer{
+		width: auto;
+		min-width: auto;
+		background-color: #434448;
+		height: auto;
+		color: $complementary-color;
+		padding: rem(40) rem(30);
+
+		.wrap{
+			// @include con-normal-type;
+			width: 100%;
+			position: relative;
+			padding-top: rem(115);
+			.logo {
+				display: block;
+				text-align: center;
+				a{
+					display: inline-block;
+					width: rem(212);
+					height: rem(45);
+					background-image: url(../images/logo-white.png);
+					background-repeat: no-repeat;
+					background-size: contain;
+				}
+			}
+			.center{
+				display: inline-block;
+				width: 100%;
+				margin-left: 0;
+				margin-top: rem(55);
+				text-align: center;
+				ul {
+					display: flex;
+					li{
+						font-size: rem(24);
+						flex: 1;
+						padding-right: 0;
+						margin-right: 0;
+						border-right: 1px solid #7c7c7f;
+						&:last-child{
+							border-right: 0;
+						}
+						&:nth-of-type(1),&:nth-of-type(3){
+							flex-grow: 2;
+							-webkit-flex-grow: 2;
+						}
+						&:nth-of-type(2){
+							flex-grow: 3;
+							-webkit-flex-grow: 3;	
+						}
+					}
+				}
+				a{
+					font-size: rem(24);
+					color: $complementary-color;
+				}
+				p{
+					color: darken($complementary-color, 40%);
+					font-size: rem(24);
+					margin-top: 20px;
+				}
+			}
+			.dropdown{
+				position: absolute;
+				left: 0;
+				top: 0;
+				.toggle{
+					width: 100%;
+					font-size: rem(28);
+					padding: $dropdown-padding-mobile;
+					&:after{
+						height: rem(11);
+						width: rem(18);
+					}
+				}
+				.dropdown-menu{
+					top: $dropdown-height-mobile;
+					width: 100%;
+					li{
+						padding: rem(10);
+						&:hover{
+							background-color: lightgray;
+						};
+						a{
+							display: block;
+							font-size: rem(28);
+
+						}
+					}
+				}
+			}
+		}
+	}
+}

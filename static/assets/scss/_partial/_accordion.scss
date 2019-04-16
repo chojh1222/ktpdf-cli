@@ -1,0 +1,46 @@
+.accordion{
+	li{
+		// @include pad-normal;
+		border-bottom: rem(1) solid $border-gray;
+		cursor: pointer;
+		&.toggle{
+			a{
+				font-size: rem(20);
+				font-weight: 500;
+			}
+			&:after{
+				position: absolute;
+				right: $pad-side-normal;
+				content:'';
+				display: inline-block;
+				width: rem(24);
+				height: rem(14);
+				background-image: url(../images/icon-accor-arrow.png);
+				background-repeat: no-repeat;
+				transform: rotate(180deg);
+				transition: all .2s;
+				background-size: contain;
+				top: 50%;
+			}
+			&.on:after{
+				transform: rotate(0deg) translateY(-50%);
+			}
+		}
+		&.contents{
+			// display: none;
+			height: 0;
+			padding: 0 $pad-side-bold;
+			overflow: hidden;
+			background-color: $bg-gray-lighten;
+			font-size: rem(16);
+			color: $default-color-lighten;
+			line-height: 1.75;
+			transition: all .2s;
+			&.on{
+				// display: block;
+				height: auto;
+				@include pad-bold;
+			}
+		}
+	}
+}

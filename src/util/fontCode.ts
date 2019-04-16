@@ -35,4 +35,4 @@ export const fontList = [
     // {fontFamily: 'Gungsuh', fontName: '궁서'},
 ];
 
-export const fontSizeList = [12, 14, 16, 18, 20, 24];
+export const fontSizeList = [10, 11, 12, 14, 16, 18, 20, 24];

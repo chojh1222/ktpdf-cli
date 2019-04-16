@@ -1,0 +1,75 @@
+.input-select{
+	position: relative;
+	border: rem(1) solid $border-gray;
+	display: inline-block;
+	height: rem(40);
+	min-width: rem(50);
+	overflow: hidden;
+	select{
+		width: 99%;
+		height: 100%;
+		border: 0;
+		padding: calc( #{$input-pad-mobile} / 2 - 2px);
+		margin: rem(1);
+		font-size:$input-pc-fs;
+		background-color: rgba(0,0,0,0);
+	}
+	&:after{
+		content: '';
+		display: inline-block;
+		position: absolute;
+		width: calc(#{rem(22)} / 2);
+		height: calc(#{rem(12)} / 2);
+		right: rem(8);
+		top: 50%;
+		transform: translateY(-50%);
+		background-image: url(../images/icon-select-arrow.png);
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+	&.secondary{
+		border: rem(2) solid $main-color;
+		background-color: $bg-gray-lighten;
+		height: rem(55);
+		select{
+			color: $main-color;
+			font-size: rem(18);
+			font-weight: 500;
+		}
+	}
+}
+@media screen and (max-width: 1000px){
+
+	.input-select{
+		position: relative;
+		border: rem(2) solid $border-gray;
+		display: inline-block;
+		height: rem(80);
+		overflow: hidden;
+		select{
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 99%;
+			// height: 100%;
+			border: 0;
+			padding: $input-pad-mobile;
+			margin: rem(1);
+			font-size:$input-mobile-fs;
+		}
+		&:after{
+			content: '';
+			display: inline-block;
+			position: absolute;
+			width: rem(23);
+			height: rem(13);
+			right: rem(15);
+			top: 50%;
+			transform: translateY(-50%);
+			background-image: url(../images/icon-select-arrow.png);
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+
+	}
+}

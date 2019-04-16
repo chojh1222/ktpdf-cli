@@ -71,6 +71,7 @@ class BoxWithCheckbox extends Component<Props, any> {
       type,
       boxIndex,
       signerIndex,
+      minWidth,
     } = this.props.boxData;
 
     const {
@@ -144,6 +145,8 @@ class BoxWithCheckbox extends Component<Props, any> {
             }
           }}
           onMouseLeave={this.onMouseLeave}
+          minWidth={minWidth * scale}
+          minHeight={minWidth * scale}
         >
 
           <CheckboxMarker

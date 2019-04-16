@@ -1,0 +1,91 @@
+// 기본 폰트사이즈
+$rem : 16;
+
+// default-color
+$default-color : #333333; //텍스트
+$default-color-lighten : #666666; //텍스트-밝은
+$default-color-light : #999999; //텍스트-더 밝은
+$main-color : #2cbbb6; //민트
+$sub-color : #23becc; //민트
+$main-color-another : #9cd5d3; //민트-다른색
+$main-color-lighten : #ebf6f5; //민트-밝은
+$main-color-darken : darken($main-color, 50%); //민트-어두운
+$sub-color-darken : #282a37; //진청색-어두운
+$emphasis-color : #2cbbb6; //민트
+$point-red-color: #ff004e;
+$complementary-color : #ffffff; // 보색 - 어두운배경의 텍스트 - 흰색
+$placeholder-color : #999999; // 플레이스홀더 - 옅은 그레이
+$login-h1-color : #999999; // 로그인 h1
+$link-color: #3d4e8f;
+$bg-gray-lighten: #f9f9f9;
+
+$border-gray: #d5d5d5;
+$border-black: #333333;
+$border-emphasis: $main-color;
+
+// 컨테이너 크기
+$container-width-pc : 1200px;
+$container-col-3 : $container-width-pc / 3;
+
+// board 패딩 공통
+$pad-side-bolder: rem(70);
+$pad-side-bold: rem(50);
+$pad-side-normal: rem(26);
+$pad-top-bottom: rem(30);
+
+//모바일 패딩 공통
+$pad-side: rem(30);
+// 모바일에서 header영역
+$mg-header: rem(90);
+// 레이어팝업 pc에서 header영역
+$layer-pop-head: rem(60);
+
+// dropdown
+$dropdown-default-width: rem(160);
+$dropdown-default-height: rem(44);
+$dropdown-wide-width: rem(320);
+$dropdown-default-padding: rem(14) rem(22);
+$dropdown-default-radius: rem(4);
+
+$dropdown-height-mobile: rem(60);
+$dropdown-padding-mobile: rem(18) rem(22);
+
+// input 간격
+$input-pad-top: rem(15);
+$btn-wide-pad-top: rem(30);
+$btn-fit-pad-top: rem(100);
+//input + 버튼
+$input-width-btn: rem(180);
+//input 기본 폰트사이즈
+$input-mobile-fs: rem(24);
+$input-pc-fs: calc(#{$input-mobile-fs} / 2);
+// input 패딩 기본간격
+$input-pad-mobile: rem(22);
+
+// 박스 그림지
+$shadow: rem(1) rem(1) rem(10) rgba(0,0,0,.1);
+$shadow-large: rem(5) rem(5) rem(20) rgba(0,0,0,.5);
+
+// 버튼색상
+$btn-disabled: #aaaaaa;
+$btn-gray: #aaaaaa;
+
+// 하단고정 버튼 높이
+$fit-btn-height: rem(110);
+// 기본 하단버튼 간격
+$btn-wrap-top: rem(100);
+$btn-wrap-bottom: rem(40);
+
+
+
+// input 안내문구
+$notice-color: $default-color-lighten;
+$positive-color: $main-color;
+$alert-color: $point-red-color;
+
+
+
+
+/////////admin///////////
+
+$gray-darken : #dddddd;

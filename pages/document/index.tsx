@@ -1,7 +1,7 @@
 import 'raf/polyfill';
 import 'es6-shim';
 import 'es6-promise';
-import 'reset-css/reset.css';
+// import 'reset-css/reset.css';
 import "@babel/polyfill";
 import * as React from 'react';
 import DocumentContainer from '../../src/containers/desktop/Document';
@@ -11,7 +11,7 @@ import {ISigner} from "../../src/interface/ISigner";
 import Head from 'next/head';
 import { pdfjs } from 'react-pdf';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 interface IDocumentProps {
   documentNo: string;
@@ -200,6 +200,7 @@ class Document extends React.Component<IDocumentProps, React.ComponentState> {
         <Head>
           <title>kt - document</title>
           <link href="/assets/css/style.css" rel="stylesheet" />
+          <link href="/assets/css/viewer.css" rel="stylesheet" />
         </Head>
         <DocumentContainer
           documentUrl={documentUrl}

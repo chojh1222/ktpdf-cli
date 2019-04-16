@@ -1,0 +1,144 @@
+@media screen and (min-width: 1001px){
+	.sub-banner{
+		@include con-wide-type;
+		height: 400px;
+		background-image: url(../images/sub-banner.jpg);
+		background-repeat: no-repeat;
+		background-color: green;
+		background-position: center;
+		background-size: cover;
+		.banner{
+			text-align: center;
+			padding-top: 140px;
+			height: 400px;
+			.tit{
+				display: inline-block;
+				font-size: rem(36);
+				font-weight: 700;
+			}
+			p{
+				font-size: rem(28);
+				line-height: 1.4;
+				margin-top: rem(14)
+			};
+		}
+		&.owl-theme .owl-dots{
+			position: absolute;
+			width: 100%;
+			bottom: 120px;
+			.owl-dot span{
+				width: rem(6);
+				height: rem(6);
+				margin: rem(2);
+				background-color: #aaaaaa;
+			}
+		}
+		&.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+			background-color: $main-color;
+		}
+		&.bg02{
+			background-image: url(../images/sub-banner-02.jpg);
+		}
+		&.bg03{
+			background-image: url(../images/sub-banner-03.jpg);
+		}
+	}
+	.sub-banner-wrap{
+		position: relative;
+		.wedge{
+			@include con-wide-type;
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			z-index: 1;
+			div{
+				display: inline-block;
+				float: left;
+				width: 50%;
+				height: 1px;
+				box-sizing: border-box;
+				border-bottom: rem(50) solid $main-color-lighten;
+				&.left{
+					border-right: rem(50) solid rgba(0,0,0,0);
+				}
+				&.right{
+					border-left: rem(50) solid rgba(0,0,0,0);
+				}
+			}
+		}
+	}
+}
+@media screen and (max-width: 1000px){
+	.sub-banner{
+		height: rem(400);
+		background-image: url(../images/sub-banner.jpg);
+		background-repeat: no-repeat;
+		background-color: green;
+		background-position: center;
+		background-size: cover;
+		.banner{
+			text-align: center;
+			padding: rem(130) rem(50) 0 rem(50);
+			height: rem(400);
+			.tit{
+				display: inline-block;
+				font-size: rem(36);
+				font-weight: 700;
+			}
+			p{
+				font-size: rem(25);
+				line-height: 1.4;
+				margin-top: rem(14)
+			};
+		}
+		&.owl-theme .owl-dots{
+			position: absolute;
+			width: 100%;
+			bottom: rem(75);
+			.owl-dot span{
+				width: rem(6);
+				height: rem(6);
+				margin: rem(2);
+				background-color: #aaaaaa;
+			}
+		}
+		&.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+			background-color: $main-color;
+		}
+		&.bg02{
+			background-image: url(../images/sub-banner-02.jpg);
+		}
+		&.bg03{
+			background-image: url(../images/sub-banner-03.jpg);
+			.banner{
+				p, .marker{
+					font-size: rem(36);
+				}
+			}
+		}
+	}
+	.sub-banner-wrap{
+		position: relative;
+		.wedge{
+			// @include con-wide-type;
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			z-index: 1;
+			div{
+				display: inline-block;
+				float: left;
+				width: 50%;
+				height: 1px;
+				box-sizing: border-box;
+				border-bottom: rem(50) solid $main-color-lighten;
+				&.left{
+					border-right: rem(50) solid rgba(0,0,0,0);
+				}
+				&.right{
+					border-left: rem(50) solid rgba(0,0,0,0);
+				}
+			}
+		}
+	}
+}

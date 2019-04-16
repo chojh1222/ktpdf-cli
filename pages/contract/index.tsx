@@ -1,7 +1,7 @@
 import 'raf/polyfill';
 import 'es6-shim';
 import 'es6-promise';
-import 'reset-css/reset.css';
+// import 'reset-css/reset.css';
 import "@babel/polyfill";
 import * as React from 'react';
 import ContractContainer from '../../src/containers/desktop/Contract';
@@ -57,6 +57,7 @@ class Contract extends React.Component<any, React.ComponentState> {
         <Head>
           <title>kt - contract</title>
           <link href="/assets/css/style.css" rel="stylesheet" />
+          <link href="/assets/css/viewer.css" rel="stylesheet" />
         </Head>
         <DragDropContextProvider backend={HTML5Backend}>
           <ContractContainer

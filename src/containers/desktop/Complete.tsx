@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Document, Page, pdfjs} from 'react-pdf';
 
-import "./reset.css";
+// import "./reset.css";
 import {deepCopy} from "../../util/deepCopy";
 import DimmedLayer from "../../components/DimmedLayer";
 import SignatureLayer from "../../components/SignatureLayer";

@@ -1,0 +1,457 @@
+.btn{
+	display: inline-block;
+	&.primary{
+		background-color: $main-color;
+		color: $complementary-color;
+		text-align: center;
+		font-size: rem(14);
+		font-weight: 500;
+		display: inline-block;
+	}
+	&.secondary{
+		background-color: $sub-color;
+		color: $complementary-color;
+		text-align: center;
+		font-size: rem(14);
+		font-weight: 500;
+		display: inline-block;
+	}
+	&.third{
+		background-color: $sub-color-darken;
+		color: $complementary-color;
+		text-align: center;
+		font-size: rem(14);
+		font-weight: 500;
+		display: inline-block;
+	}
+	&.wide{
+		width: 100%;
+		padding: rem(19) 0;
+		font-size: rem(16);
+		margin-top: $btn-wide-pad-top;
+		border-radius: rem(4);
+	}
+	&.more{
+		color: $main-color;
+		font-size: rem(14);
+		span{
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.icon-more{
+			margin-left: 10px;
+		}
+	}
+	&.line{
+		display: inline-block;
+		border: rem(2) solid $main-color;
+		padding: rem(9) rem(14);
+		color: $main-color;
+		font-size: rem(14);
+		font-weight: 500;
+		&.icon{
+			position: relative;
+			min-width: rem(165);
+			.icon-btn-arrow{
+				width: rem(8);
+				height: rem(14);
+				background-size: contain;
+			}
+		}
+		&.gray-line{
+			border: rem(2) solid $border-gray;
+			color: $default-color-light;
+		}
+	}
+	&.sm{
+		padding: rem(7) rem(16);
+		border-width: rem(1);
+		font-weight: 400;
+		border-radius: rem(4);
+		&.gray-line{
+			border-width: rem(1);
+		}
+	}
+	&.btn-round{
+		display: inline-block;
+		padding: rem(10) 0;
+		width: rem(100);
+		border-radius: rem(30);
+		border: rem(2) solid #aaaaaa;
+		font-size: rem(14);
+		color: #aaaaaa;
+		text-align: center;
+		&.line{
+			border-color: $main-color;
+			color: $main-color;
+			background-color: #ffffff;
+		}
+		&.primary{
+			border-color: $main-color;
+			color: $complementary-color;
+		}
+		&.third{
+			border-color: $sub-color-darken;
+			color: $complementary-color;
+		}
+		&.gray{
+			border-color: #aaaaaa;
+			color: $complementary-color;
+		}
+	}
+	&.icon{
+		[class*="icon-"]{
+			margin-right: rem(10);
+			vertical-align: middle;
+			background-size: contain;
+			height: rem(16);
+		}
+		&.icon-right{
+			[class*="icon-"]{
+				position: absolute;
+				right: rem(15);
+			    top: 50%;
+    			transform: translateY(-50%);
+    			margin-right: 0;
+			}
+		}
+		&.icon-left{
+			[class*="icon-"]{
+				float: left;
+			}
+		}
+	}
+	&.sub-dark{
+		background-color: $sub-color-darken;
+		color: $complementary-color;
+	}
+	&.gray{
+		background-color: $btn-gray;
+		color: $complementary-color;
+	}
+	&.disabled{
+		cursor: default;
+		background-color: $btn-disabled;
+		color: $complementary-color;
+	}
+	&.btn-default{
+		min-width: rem(240);
+		text-align: center;
+		padding: rem(18) 0;
+		font-size: rem(18);
+		font-weight: 500;
+		border-radius: rem(4);
+		&.line{
+			border: rem(2) solid $main-color;
+			padding: rem(18) 0;
+		}
+	}
+}
+.fit-btn-wrap{
+	@include screen-fit;
+	height: calc(#{$fit-btn-height} / 2);
+	.btn{
+		width: 100%;
+		height: auto;
+		border-radius: 0;
+		bottom: 0;
+	}
+	&.multi{
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+		.btn{
+			display: table-cell;
+			position: relative;
+			width: auto;
+		}
+	}
+}
+.btn-wrap{
+	position: relative;
+	text-align: center;
+	.right{
+		position: absolute;
+	    right: 0;
+	    top: 0;
+	}
+	&.multi{
+		.btn{
+			margin-right: rem(10);
+			&:last-child{
+				margin-right: 0;
+			}
+		}
+	}
+}
+.bottom-btn-wrap{
+	@include bottom-btn-wrap-pc;
+	position: relative;
+	text-align: center;
+	.right{
+		position: absolute;
+	    right: 0;
+	    top: 0;
+	}
+	&.multi{
+
+		width: 100%;
+		text-align: left;
+		.btn{
+			// display: table-cell;
+			width: calc( 100% / 2 - #{rem(8)} );
+			box-sizing: border-box;
+			height: rem(45);
+			vertical-align: middle;
+			&:last-child{
+				float: right;
+			}
+
+			&.btn-default{
+				min-width: auto;
+				padding: rem(14) 0;
+				font-weight: 400;
+				font-size: rem(14);
+			}
+		}
+
+	}
+	.center-to-full{
+		min-width: rem(240);
+		text-align: center;
+		padding: rem(18) 0;
+		font-size: rem(18);
+		font-weight: 500;
+		border-radius: rem(4);
+	}
+	.right-to-full{
+		min-width: rem(240);
+		text-align: center;
+		padding: rem(18) 0;
+		font-size: rem(18);
+		font-weight: 500;
+		border-radius: rem(4);
+		float: right;
+	}
+	.center-to-wide{
+		min-width: rem(240);
+		text-align: center;
+		padding: rem(18) 0;
+		font-size: rem(18);
+		font-weight: 500;
+		border-radius: rem(4);
+	}
+}
+
+@media screen and (max-width: 1000px){
+
+	.btn{
+		display: inline-block;
+		&.primary{
+			background-color: $main-color;
+			color: $complementary-color;
+			text-align: center;
+			font-size: rem(32);
+			font-weight: 500;
+			display: inline-block;
+		}
+		&.secondary{
+			background-color: $sub-color;
+			color: $complementary-color;
+			text-align: center;
+			font-size: rem(32);
+			font-weight: 500;
+			display: inline-block;
+		}
+		&.third{
+			background-color: $sub-color-darken;
+			color: $complementary-color;
+			text-align: center;
+			font-size: rem(32);
+			font-weight: 500;
+			display: inline-block;
+		}
+		&.wide{
+			width: 100%;
+			padding: rem(38) 0;
+			border-radius: rem(4);
+			margin-top: $btn-wide-pad-top;
+			font-size: rem(32);
+			&.line{
+				padding: rem(38) 0;
+				font-size: rem(32);
+				color: $main-color;
+				background-color: #ffffff;
+			}
+
+		}
+		&.line{
+			display: inline-block;
+			border: rem(2) solid $main-color;
+			padding: rem(18) rem(28);
+			color: $main-color;
+			font-size: rem(28);
+			font-weight: 500;
+			&.icon-right{
+				min-width: rem(230);
+				.icon-btn-arrow{
+					width: rem(14);
+					height: rem(24);
+					background-size: contain;
+				}
+			}
+			&.sm{
+				padding: rem(15) rem(27);
+				font-size: rem(22);
+			}
+		}
+		/* &.icon-right{
+			[class*="icon-"]{
+				float: right;
+			}
+		}
+		&.icon-left{
+			[class*="icon-"]{
+				float: left;
+			}
+		} */
+		&.icon{
+			[class*="icon-"]{
+				margin-right: rem(10);
+				vertical-align: middle;
+				background-size: contain;
+				height: rem(16);
+			}
+			&.icon-right{
+				[class*="icon-"]{
+					position: absolute;
+					right: rem(30);
+				    top: 50%;
+	    			transform: translateY(-50%);
+	    			margin-right: 0;
+				}
+			}
+			&.icon-left{
+				[class*="icon-"]{
+					float: left;
+				}
+			}
+		}
+		&.btn-round{
+			padding: rem(10) 0;
+			min-width: rem(150);
+			border-radius: rem(30);
+			font-size: rem(24);
+			color: #aaaaaa;
+			text-align: center;
+		}
+
+
+		&.sub-dark{
+			background-color: $sub-color-darken;
+			color: $complementary-color;
+		}
+		&.disabled{
+			cursor: default;
+			background-color: $btn-disabled;
+			color: $complementary-color;
+		}
+	}
+
+	.fit-btn-wrap{
+		@include screen-fit;
+		&.multi{
+			display: table;
+			table-layout: fixed;
+			width: 100%;
+			.btn{
+				display: table-cell;
+				position: relative;
+				width: auto;
+			}
+		}
+	}
+	.btn-wrap{
+		@include bottom-btn-wrap;
+		position: relative;
+		text-align: center;
+		.right{
+			position: absolute;
+		    right: 0;
+		    top: 0;
+		}
+		&.multi{
+			width: calc(100% - #{$pad-side} * 2);
+			margin: 0 $pad-side;
+			text-align: left;
+			.btn{
+				width: calc(50% - #{rem(5)});
+				height: rem(90);
+				&.btn-default{
+					padding: rem(28) 0;
+				}
+				&:last-child{
+					float: right;
+				}
+
+			}
+		}
+	}
+	.bottom-btn-wrap{
+		@include bottom-btn-wrap;
+		position: relative;
+		text-align: center;
+		.right{
+			position: absolute;
+		    right: 0;
+		    top: 0;
+		}
+		&.multi{
+
+			width: 100%;
+			text-align: left;
+			.btn{
+				width: calc( 100% / 2 - #{rem(8)} );
+				box-sizing: border-box;
+				height: rem(90);
+				vertical-align: middle;
+				&:last-child{
+					float: right;
+				}
+
+				&.btn-default{
+					min-width: auto;
+					padding: rem(28) 0;
+					font-weight: 400;
+					font-size: rem(28);
+				}
+			}
+
+		}
+		.btn{
+			&.center-to-full{
+				width: calc( 100% + #{$pad-side} * 2);
+				margin-left: -$pad-side;
+				padding: rem(38) 0;
+			}
+			&.right-to-full{
+				width: calc( 100% + #{$pad-side} * 2);
+				margin-left: -$pad-side;
+				padding: rem(38) 0;
+				&.icon-right{
+					[class*="icon-"]{
+						display: none;
+					}
+				}
+			}
+			&.center-to-wide{
+				width: 100%;
+				padding: rem(38) 0;
+				border-radius: rem(4);
+				margin-top: $btn-wide-pad-top;
+				font-size: rem(32);
+			}
+
+		}
+	}
+}

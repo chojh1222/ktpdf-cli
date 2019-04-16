@@ -1,0 +1,38 @@
+.top-anchor{
+	@include con-wide-type;
+	position: relative;
+	height: 0;
+	transition: all .3s;
+	opacity: 1;
+	overflow: visible;
+	> a{
+		display: inline-block;
+		position: absolute;
+		right: rem(50);
+		top: rem(-65/2);
+		background-image: url(../images/icon-anchor.png);
+		background-repeat: no-repeat;
+		width: rem(65);
+		height: rem(65);
+		border-radius: 50%;
+		overflow: hidden;
+	}
+	&.pof{
+		position: fixed;
+		top: auto;
+		bottom: rem(50);
+	}
+	&.ontop{
+		opacity: 0;
+	}
+	
+}
+
+@media screen and (max-width: 1000px){
+	.top-anchor{
+		min-width: auto;
+		a{
+			background-size: contain;
+		}
+	}
+}

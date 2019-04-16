@@ -1,0 +1,9 @@
+//rem 변환 함수
+@function rem($px){
+	@return $px / $rem + rem;
+}
+
+// @function calc(a, b){
+// 	var d = b;
+// 	@return "calc( " + a + "% + " + d ")";
+// }

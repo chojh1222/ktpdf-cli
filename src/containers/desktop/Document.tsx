@@ -9,14 +9,14 @@ import { ISigner } from "../../interface/ISigner";
 import { deepCopy } from "../../util/deepCopy";
 import { fontList, fontSizeList } from '../../util/fontCode';
 import PdfViewer from "./PdfViewer";
-import "./reset.css";
+// import "./reset.css";
 
 
 
 
 // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 // pdfjs.GlobalWorkerOptions.workerSrc = `../../pdf.worker.js`;
-
+let boxCnt = 0;
 
 const defaultData = {
   width: 200,
@@ -26,7 +26,11 @@ const defaultData = {
   top: 50,
   textLeft: 0,
   signLeft: 250,
-  boxIndex: -1
+  boxIndex: -1,
+  textboxMinWidth: 50,
+  signboxMinWidth: 50,
+  checkboxMinWidth: 20,
+  radioboxMinWidth: 20,
 };
 
 const getInitTextBox = (page, signerIndex, boxIndex): TextBox => {
@@ -36,12 +40,12 @@ const getInitTextBox = (page, signerIndex, boxIndex): TextBox => {
     left: defaultData.textLeft,
     fontSize: defaultData.fontSize,
     fontFamily: defaultData.fontFamily,
-    width: 300,
-    height: 40,
+    width: 150,
+    height: 20,
     signerIndex,
     page,
-    boxIndex,
-    minWidth: undefined,
+    boxIndex: boxCnt++,
+    minWidth: defaultData.textboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -52,12 +56,12 @@ const getInitSignBox = (page, signerIndex, boxIndex): SignBox => {
     type: 'sign',
     top: defaultData.top,
     left: defaultData.signLeft,
-    width: 100,
-    height: 100,
+    width: 50,
+    height: 50,
     signerIndex,
     page,
-    boxIndex,
-    minWidth: undefined,
+    boxIndex: boxCnt++,
+    minWidth: defaultData.signboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -74,8 +78,8 @@ const roadInitTextBox = (input, index): TextBox => {
     height: input.h,
     signerIndex:0,  // 생성자꺼...
     page: input.page,
-    boxIndex : index,
-    minWidth: undefined,
+    boxIndex: boxCnt++,
+    minWidth: defaultData.textboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -91,8 +95,8 @@ const roadInitSignBox = (input, index): SignBox => {
     height: input.h,
     signerIndex:0,  // 생성자꺼...
     page: input.page,
-    boxIndex : index,
-    minWidth: undefined,
+    boxIndex: boxCnt++,
+    minWidth: defaultData.signboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -108,8 +112,8 @@ const roadInitCheckBox = (input, index): SignBox => {
     height: input.h,
     signerIndex:0,  // 생성자꺼...
     page: input.page,
-    boxIndex : index,
-    minWidth: undefined,
+    boxIndex: boxCnt++,
+    minWidth: defaultData.checkboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -121,12 +125,12 @@ const getInitCheckBox = (page, signerIndex, boxIndex): CheckBox => {
     type: 'checkbox',
     top: defaultData.top,
     left: defaultData.signLeft,
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
     signerIndex,
     page,
-    boxIndex,
-    minWidth: undefined,
+    boxIndex: boxCnt++,
+    minWidth: defaultData.checkboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -138,12 +142,12 @@ const getInitRadioBox = (page, signerIndex, boxIndex): RadioBox => {
     type: 'radio',
     top: defaultData.top,
     left: defaultData.signLeft,
-    width: 130,
-    height: 30,
+    width: 100,
+    height: 20,
     signerIndex,
     page,
-    boxIndex,
-    minWidth: undefined,
+    boxIndex: boxCnt++,
+    minWidth: defaultData.radioboxMinWidth,
     minHeight: undefined,
     maxWidth: undefined,
     maxHeight: undefined,
@@ -175,7 +179,8 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
       numPages: null,
       pageNumber: 1,
       boxDataList: [],
-      scale: 1.5,
+      // scale: 1.5,
+      scale: undefined,
       selectSignerIndex: -1,      
       newInputBox: null,
     };
@@ -315,6 +320,72 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
     // this.setState({
     //   boxDataList: copyBoxDataList,
     // });
+  }
+
+  private newInputBox2(type, e) {
+      
+    if(this.state.newInputBox) {
+      return;
+    }
+
+    const {
+      boxDataList,
+      pageNumber,
+      selectSignerIndex,
+      scale,
+    } = this.state;
+    const isSelected = this.checkSelectedValue();
+    if (!isSelected) {
+      return false;
+    }
+
+    
+
+    const copyBoxDataList = [...boxDataList];
+
+    
+    let initBoxData;
+    if(type === 'text') {
+      initBoxData = getInitTextBox(pageNumber, selectSignerIndex, copyBoxDataList.length);
+    }
+    else if(type === 'sign') {
+      initBoxData = getInitSignBox(pageNumber, selectSignerIndex, copyBoxDataList.length);
+    }
+    else if(type === 'checkbox') {
+      initBoxData = getInitCheckBox(pageNumber, selectSignerIndex, copyBoxDataList.length);
+    }
+    else if(type === 'radio') {
+      initBoxData = getInitRadioBox(pageNumber, selectSignerIndex, copyBoxDataList.length);
+    }
+
+    
+    // let left = e.pageX - $(e.currentTarget).offset().left;
+    // let top = e.pageY - $(e.currentTarget).offset().top;
+    let width = initBoxData.width;
+    let height = initBoxData.height;
+    // let left = $('.page-wrapper').width() / scale - width - 20; // right
+    let left = $('.page-wrapper').width() / 2 / scale - width / 2; // center
+    let top = $('.editor-view').scrollTop() / scale + 20;
+    
+    console.log(left, top, width, height)
+
+    initBoxData.left = left;
+    initBoxData.top = top;
+    initBoxData.width = width;
+    initBoxData.height = height;
+
+    console.log(initBoxData)
+
+    // this.setState( {
+    //   newInputBox: initBoxData
+    // })
+
+
+    copyBoxDataList.push(initBoxData);
+
+    this.setState({
+      boxDataList: copyBoxDataList,
+    });
   }
 
   addInputbox = (inputbox: InputBox) => {
@@ -633,6 +704,10 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
     })
   }
 
+  setScale = (scale) => {
+    this.setState({scale})
+  }
+
   onInutboxAreaMouseUp = (e: React.MouseEvent) => {
     const {newInputBox, scale, pageNumber} = this.state;
     if(!newInputBox) {
@@ -658,12 +733,8 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
     this.addInputbox(newInputBox);
   }
 
-  onPageChange = (pageNumber: number, scrollTo: number) => {
-    this.setState({pageNumber}, () => {
-      if(scrollTo >= 0) {
-        window.scrollTo(0, scrollTo);
-      }
-    });
+  onPageChange = (pageNumber: number) => {
+    this.setState({pageNumber});
   }
 
 
@@ -681,6 +752,7 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
 
 
     const curPageInputBox = boxDataList.filter(box => box.page === pageNumber);
+    console.log('curPageInputBox = ', curPageInputBox)
 
     return (
       <div className="container service">
@@ -703,7 +775,9 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
             {/* <ZoomController updateRightContentZoom={this.updateRightContentZoom} zoom={scale}/> */}
           </div>
           <div className="edit-body">
-            <PdfViewer documentUrl={this.props.documentUrl} scale={scale} onPageChange={this.onPageChange} pageNumber={pageNumber}>
+            <PdfViewer documentUrl={this.props.documentUrl} scale={scale} onPageChange={this.onPageChange} pageNumber={pageNumber}
+                       setScale={this.setScale}
+            >
                         <ContainerForBoxes
                           updateInputBox={this.updateInputBox}
                           deleteInputBox={this.deleteInputBox}
@@ -812,10 +886,14 @@ class DocumentContainer extends React.Component<IDocumentProps, React.ComponentS
                 </select>
               </div>
               <ul>
-                <li><a onClick={e => this.newInputBox('text', e.pageX, e.pageY)}><span className="icon-insert-txt"></span>텍스트 입력</a></li>
+                {/* <li><a onClick={e => this.newInputBox('text', e.pageX, e.pageY)}><span className="icon-insert-txt"></span>텍스트 입력</a></li>
                 <li><a onClick={e => this.newInputBox('sign', e.pageX, e.pageY)}><span className="icon-stamp"></span>서명 (Stamp)</a></li>
                 <li><a onClick={e => this.newInputBox('checkbox', e.pageX, e.pageY)}><span className="icon-checklist"></span>체크항목</a></li>
-                <li><a onClick={e => this.newInputBox('radio', e.pageX, e.pageY)}><span className="icon-selected-list"></span>선택항목</a></li>
+                <li><a onClick={e => this.newInputBox('radio', e.pageX, e.pageY)}><span className="icon-selected-list"></span>선택항목</a></li> */}
+                <li><a onClick={e => this.newInputBox2('text', e)}><span className="icon-insert-txt"></span>텍스트 입력</a></li>
+                <li><a onClick={e => this.newInputBox2('sign', e)}><span className="icon-stamp"></span>서명 (Stamp)</a></li>
+                <li><a onClick={e => this.newInputBox2('checkbox', e)}><span className="icon-checklist"></span>체크항목</a></li>
+                <li><a onClick={e => this.newInputBox2('radio', e)}><span className="icon-selected-list"></span>선택항목</a></li>
                 {/* <li><a><span className="icon-memo"></span>메모 입력</a></li> */}
                 <li><a onClick={this.updateDocumentInfo}>저장</a></li>
               </ul>

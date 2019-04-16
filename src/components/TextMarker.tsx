@@ -52,6 +52,20 @@ export default class TextMarker extends Component<Props, any> {
     $(e.currentTarget).find('.inputbox-header').hide();
   }
 
+  onBeforeInput = (e) => {
+    if(e.target.scrollHeight > e.target.offsetHeight) {
+      console.log('no more space for input!')
+      e.preventDefault();
+    }
+  }
+
+  onInput = (e) => {
+    if(e.target.scrollHeight > e.target.offsetHeight) {
+      console.log('no more space for input!')
+      e.preventDefault();
+    }
+  }
+
   render() {
     const {
       page,
@@ -139,9 +153,12 @@ export default class TextMarker extends Component<Props, any> {
                 // fontWeight: 'bold',
                 padding: 0,
                 margin: 0,
+                // lineHeight: 1.2,
               }}
               placeholder="텍스트 입력란"
               onDoubleClick={this.props.onDoubleClick}
+              // onBeforeInput={this.onBeforeInput}
+              // onInput={this.onInput}
             />
             {/* {showCloseBtn && 
             // {true && 

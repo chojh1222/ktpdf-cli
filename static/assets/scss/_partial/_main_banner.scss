@@ -1,0 +1,96 @@
+.main-banner{
+	position: relative;
+	width: 100%;
+	height: 450px;
+	.owl-carousel .owl-item{
+		.banner{
+			position: relative;
+			width: 100%;
+			// min-width: 1920px;
+			background-color: green;
+			text-align: center;
+			height: 450px;
+			overflow: hidden;
+			p{
+				position: absolute;
+			    padding-top: 160px;
+			    z-index: 1;
+			    left: 50%;
+			    transform: translateX(-50%);
+			}
+		 	&>img{
+		 		position: absolute;
+			    width: auto;
+			    height: 100%;
+			    left: 50%;
+			    transform: translateX(-50%);
+			}
+		}
+	}
+	.banner-nav{
+		display: inline-block;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		height: rem(80);
+		width: rem(80);
+		z-index: 1;
+		a{
+			display: inline-block;
+			overflow: hidden;
+			position: absolute;
+		}
+		&.pre{
+			left: rem(130);
+		}
+		&.next{
+			right: rem(130);
+			img{
+				transform: rotate(180deg);
+			}
+		}
+	}
+	.owl-theme .owl-dots{
+		position: absolute;
+	    width: 100%;
+	    bottom: 120px;
+	}
+	.owl-theme .owl-dots .owl-dot{
+		span{
+			margin:rem(3);
+			width: rem(6);
+			height: rem(6);
+			background-color: #ffffff;
+			transition: width .3s;
+		}
+		&.active span{
+			width: rem(18);
+		}
+	}
+	.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span{
+		background-color: $main-color;
+	}
+}
+
+@media screen and (max-width: 1000px){
+	.main-banner{
+		height: rem(550);
+		.owl-carousel .owl-item{
+			.banner{
+				height: rem(550);
+				p{
+					padding-top: rem(200);
+					width: 80%;
+				}
+			}
+		}
+		.banner-nav{
+			display: none;
+		}
+		.owl-theme .owl-dots{
+			position: absolute;
+		    width: 100%;
+		    bottom: rem(150);
+		}
+	}
+}

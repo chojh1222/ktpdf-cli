@@ -1,0 +1,291 @@
+html{
+	
+	&.admin{
+		background-color: $bg-gray-lighten;
+		height: 100%;
+		body{
+			height: 100%;
+		}
+		.dashboard{
+			height: 100%;
+			.gnb{
+				width: rem(240);
+				height: 100%;
+				background-color: #ffffff;
+				.header{
+					text-align: center;
+					padding-bottom: rem(30);
+					h1{
+						position: relative;
+						height: rem(80);
+						background-color: $main-color;
+						a{
+							display: block;
+							height: 100%;
+						}
+						span{
+							color: rgba(0,0,0,0);
+							opacity: 0;
+							font-size: 0;
+
+						}
+						img{
+							position: absolute;
+							top: 50%;
+							left: 50%;
+							transform: translate(-50%, -50%);
+						}
+					}
+					.regist-date{
+						display: block;
+						margin-top: rem(30);
+						text-align: center;
+						font-size: rem(14);
+						color: $default-color-lighten;
+					}
+					.dropdown{
+						position: relative;
+						display: inline-block;
+						margin: rem(16) auto 0;
+					}
+				}
+				.menu{
+					background-color: #ffffff;
+					height: calc( 100% - #{rem(214)});
+					border-top:  rem(1) solid $border-gray;
+					overflow-y: scroll;
+					.depth01{
+						font-size: rem(16);
+						color: $default-color;
+						padding: rem(18) rem(30);
+						a{
+							display: block;
+							font-weight: 500;
+						}
+						&.toggle{
+							a{
+								position: relative;
+								&:after{
+									content: '';
+									display: inline-block;
+									position: absolute;
+									top: 50%;
+									right: 0;
+									transform: translateY(-50%);
+									background-image: url(../images/icon-menu-toggle.png);
+									background-repeat: no-repeat;
+									background-size: cover;
+									height: rem(8);
+									width: rem(14);
+									z-index: 0;
+								}
+
+							}
+							&.on{
+								a{
+									&:after{
+										background-position: bottom;
+									}
+									
+								}
+							}
+						}
+						&.on{
+							background-color:lighten( $main-color, 45% );
+							a{
+								color: darken( $main-color , 15%);
+							}
+						}
+					}
+					.depth02{
+						font-size: rem(14);
+						padding: 0 rem(20) rem(13) rem(20);
+						> ul {
+							> li{
+								border-bottom: rem(1) solid $border-gray;
+								padding: rem(17) 0 rem(17) rem(30);
+								position: relative;
+								&:not(.depth03):before{
+									content: '';
+									display: inline-block;
+									position: absolute;
+									top: 50%;
+									left: rem(20);
+									transform: translateY(-50%);
+									background-image: url(../images/icon-link-arrow.png);
+									background-repeat: no-repeat;
+									background-size: contain;
+									height: rem(8);
+									width: rem(5);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.section{
+			&.login{
+				h1{
+					text-align: center;
+					font-size: rem(30);
+					img{
+						margin-right: rem(15);
+						vertical-align: middle;
+					}
+					span{
+						display: inline-block;
+						&:before{
+							content: '';
+							display: inline-block;
+							height: rem(22);
+							width: rem(2);
+							margin-right: rem(15);
+							background-color: #d5d5d5;
+							vertical-align: middle;
+						}
+						em{
+							font-weight: 700;
+						}
+					}
+				}
+				h2{
+					font-size: rem(18);
+					font-weight: 500;
+				}
+				.login-wrap{
+					padding: rem(130) 0;
+					.login-form{
+						background-color: #ffffff;
+						width: rem(500);
+						padding: rem(50);
+						margin: rem(30) auto;
+						border-radius: rem(14);
+						.info{
+							margin-top: rem(50);
+							ul{
+								border-top: rem(1) solid $border-gray;
+								padding-top: rem(20);
+								li{
+									margin-top: rem(13);
+									font-size: rem(13);
+									color: $default-color-light;
+									letter-spacing: rem(-1);
+								}
+							}
+						}
+					}
+					.check-wrap{
+						margin-top: rem(20);
+						position: relative;
+						&.save-id{
+							// padding: 0 rem(13);
+							label{
+								display: inline-block;
+								span{
+									font-size: rem(13);
+									color: $default-color;
+								}
+							}
+							.btn-find-pw{
+								float: right;
+								font-size: rem(13);
+							}
+						}
+						.link-wrap{
+							position: absolute;
+							right: rem(13);
+							top: 0;
+							ul{
+								height: 100%;
+								li{
+									display: inline-block;
+									height: rem(22);
+									// vertical-align: middle;
+									&:after{
+										content: '';
+										display: inline-block;
+										height: rem(15);
+										width: rem(2);
+										background-color: $border-gray;
+										margin: 0 rem(20);
+									}
+									&:last-child{
+										&:after{
+											content: none;
+										}
+									}
+									a{
+										display: inline-block;
+										font-size: rem(22);
+
+									}
+								}
+							}
+						}
+					}
+					.tab{
+						margin: rem(24) 0 rem(50);
+					}
+				}
+			}
+		}
+		.footer{
+			background-color: $bg-gray-lighten;
+			border-top: rem(1) solid $border-gray;
+			color: $default-color-light;
+			height: rem(100);
+			padding-top: rem(34);
+			.center{
+				position: relative;
+				margin: 0 auto;
+				width: rem(800);
+				p{
+					display: inline-block;
+					font-size: rem(14);
+					margin-left: rem(100);
+				}
+				.logo{
+					display: inline-block;
+					vertical-align: middle;
+					a{
+						display: inline-block;
+						background-image: url(../images/logo-gray.png);
+						background-repeat: no-repeat;
+						width: rem(142);
+						height: rem(31);
+					}
+				}
+				.btn-helpdesk{
+					position: absolute;
+					right: 0;
+					border: rem(1) solid #d5d5d5;
+					border-radius: rem(4);
+					padding: rem(5) rem(15);
+					color: #999999;
+					font-size: rem(13);
+				}
+
+			}
+		}
+		.notice{
+			font-size: rem(13);
+			color: $notice-color;
+			margin-top: rem(11);
+		}
+		p.notice{
+			line-height: 1.4;
+			color: $default-color-light;
+		}
+		.positive{
+			font-size: rem(13);
+			color: $positive-color;
+			margin-top: rem(11);
+		}
+		.alert{
+			font-size: rem(13);
+			color: $alert-color;
+			margin-top: rem(11);
+		}
+	}
+}

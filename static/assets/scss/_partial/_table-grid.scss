@@ -1,0 +1,390 @@
+.table-grid{
+	position: relative;
+	> ul{
+		display: table;
+		width: 100%;
+		.thead{
+			width: 100%;
+			border-top: rem(1) solid #333333;
+			> ul{
+				display: table;
+				table-layout: fixed;
+				width: 100%;
+				> li{
+					display: table-cell;
+					border-bottom: rem(1) solid $border-gray;
+					background-color: $bg-gray-lighten;
+					text-align: center;
+					padding: rem(26) 0;
+					font-size: rem(18);
+					&.chk{
+						display: table-cell;
+						background-color: $bg-gray-lighten;
+						width: rem(100);
+						.check-wrap{
+							margin-top: 0;
+							text-align: center;
+							label{
+								display: block;
+								text-align: center;
+								padding-left: 0;
+								input{
+									width: 0;
+								}
+								span.icon-chk{
+									left: 50%;
+									transform: translate(-50%, -50%);
+								}
+							}
+						}
+					}
+				}
+				
+			}
+		}
+		.trow{
+			width: 100%;
+			background-color: #ffffff;
+			> ul{
+				table-layout: fixed;
+				display: table;
+				width: 100%;
+				> li{
+					display: table-cell;
+					border-bottom: rem(1) solid $border-gray;
+					padding: rem(20) rem(5);
+					text-align: center;
+					vertical-align: middle;
+					font-size: rem(16);
+					color: $default-color-lighten;
+					input{
+						width: 100px;
+					}
+					dt{
+						display: none;
+					}
+					&.chk{
+						display: table-cell;
+						background-color: $bg-gray-lighten;
+						width: rem(100);
+						.check-wrap{
+							margin-top: 0;
+							text-align: center;
+							label{
+								padding-left: 0;
+								text-align: center;
+								padding-left: 0;
+								input{
+									width: 0;
+								}
+								span.icon-chk{
+									left: 50%;
+									transform: translate(-50%, -50%);
+								}
+							}
+						}
+					}
+				}
+			}
+			.input-text{
+				margin-top: 0;
+			}
+		}
+		
+	}
+	.btn-wrap.more{
+		display: none;
+	}
+}
+.pc-vertical-type{
+	&.table-grid{
+		> ul{
+			.trow{
+				>ul{
+					>li{
+						display: table;
+						width: 100%;
+						padding: 0;
+						dt, dd{
+							display: table-cell;
+							padding: rem(18) 0 rem(18) rem(30);
+							font-size: rem(16);
+							text-align: left;
+						}
+						dt{
+							background-color: $bg-gray-lighten;
+							width: 20%;
+						}
+						dd{
+							color: $default-color-lighten;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.pc-mobile-same{
+	&.table-grid{
+		position: relative;
+		> ul{
+			display: block;
+			width: 100%;
+			.thead{
+				display: none;
+			}
+			.trow{
+				display: block;
+				width: 100%;
+				border-bottom: rem(2) solid $border-gray;
+				padding: rem(8) 0;
+				&:nth-of-type(1){
+					// border-top: rem(2) solid red;
+				}
+				> ul{
+					width: 100%;
+					> li{
+						display: block;
+						padding: rem(6) rem(5);
+						border: none;
+						text-align: left;
+						dt, dd{
+							font-size: rem(12);
+							display: inline;
+							line-height: 1.4;
+						}
+						dt{
+							font-weight: 500;
+							color: $default-color;
+							&:after{
+								content: ' :';
+							}
+						}
+						dd{
+							color: $default-color-lighten;
+							margin-left: rem(10);
+						}
+					}
+				}
+			}
+			
+		}
+		.btn-wrap.more{
+			display: block;
+			padding: $pad-side 0;
+			.btn{
+				&.btn-default{
+					// min-width: auto;
+					padding: rem(14) 0;
+					font-weight: 400;
+					font-size: rem(14);
+				}
+			}
+		}
+		.input-select{
+			height: auto;
+			min-width: rem(300);
+			vertical-align: middle;
+			margin-left: rem(10);
+		}
+	}
+	.table-top-info{
+		position: relative;
+		font-size: rem(14);
+		border-bottom: rem(2) solid #333333;
+		padding: rem(25) 0 rem(10);
+		em{
+			color: $point-red-color;
+			font-size: rem(14);
+		}
+		h4{
+			padding: 0;
+		}
+	}
+
+}
+.table-top-info{
+	position: relative;
+	font-size: rem(22);
+	border-bottom: rem(2) solid #333333;
+	padding: rem(50) 0 rem(20);
+	em{
+		color: $point-red-color;
+		font-size: rem(22);
+	}
+	h4{
+		padding: 0;
+	}
+	.right{
+		position: absolute;
+		right: 0;
+		bottom: rem(10);
+	}
+	.btn{
+		&.line{
+			border-width: rem(1);
+			border-radius: rem(2);
+			padding: rem(7) rem(14);
+		}
+	}
+}
+
+@media screen and (max-width: 1000px){
+	.table-grid{
+		position: relative;
+		> ul{
+			display: block;
+			width: 100%;
+			.thead{
+				display: none;
+			}
+			.trow{
+				display: block;
+				width: 100%;
+				border-bottom: rem(2) solid $border-gray;
+				padding: rem(16) 0;
+				&:nth-of-type(1){
+					// border-top: rem(2) solid red;
+				}
+				> ul{
+					width: 100%;
+					> li{
+						display: block;
+						padding: rem(12) rem(10);
+						border: none;
+						text-align: left;
+						dt, dd{
+							font-size: rem(24);
+							display: inline;
+							line-height: 1.4;
+						}
+						dt{
+							font-weight: 500;
+							color: $default-color;
+							&:after{
+								content: ' :';
+							}
+						}
+						dd{
+							color: $default-color-lighten;
+							margin-left: rem(10);
+						}
+					}
+				}
+			}
+			
+		}
+		.btn-wrap.more{
+			display: block;
+			padding: $pad-side 0;
+		}
+		.input-select{
+			height: rem(80);
+			min-width: rem(150);
+			vertical-align: middle;
+			margin-left: rem(10);
+		}
+	}
+	.table-top-info{
+		position: relative;
+		font-size: rem(22);
+		border-bottom: rem(2) solid #333333;
+		padding: rem(50) 0 rem(20);
+		em{
+			color: $point-red-color;
+			font-size: rem(22);
+		}
+		h4{
+			padding: 0;
+		}
+		.right{
+			position: absolute;
+			right: 0;
+			bottom: rem(10);
+		}
+		.btn{
+			&.line{
+				font-size: rem(24);
+				border-width: rem(2);
+				border-radius: rem(2);
+				padding: rem(14) rem(18);
+			}
+		}
+	}
+	.pc-vertical-type{
+		&.table-grid{
+			.table-top-info{
+				padding: rem(50) 0 rem(20);
+				h4{
+					font-size: rem(32);
+					font-weight: 500;
+					color: $default-color;
+				}
+			}
+			> ul{
+				border-bottom: rem(2) solid $border-gray;
+				padding: rem(10) 0;
+				.trow{
+					border-bottom: 0;
+					padding: 0;
+					>ul{
+						>li{
+							padding: rem(10);
+							dt, dd{
+								display: inline;
+								padding: 0;
+								background-color: #ffffff;
+								font-size: rem(24);
+							}
+							dt{
+								width: 30%;
+							}
+							dd{
+
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.pc-mobile-same{
+		&.table-grid{
+			>ul{
+				.trow{
+					>ul{
+						>li{
+							dt, dd{
+								font-size: rem(24);
+							}
+						}
+					}
+				}
+
+			}
+			.btn-wrap.more{
+				.btn{
+					&.btn-default{
+						&.line{
+							padding: rem(18) rem(28);
+							font-size: rem(28);
+						}
+					}
+				}
+			}
+		}
+		.table-top-info{
+			position: relative;
+			font-size: rem(22);
+			border-bottom: rem(2) solid #333333;
+			padding: rem(50) 0 rem(20);
+			em{
+				color: $point-red-color;
+				font-size: rem(22);
+			}
+			h4{
+				padding: 0;
+			}
+		}
+	}
+}
